@@ -1,2 +1,3 @@
 # GEO Microarray Data Download
-It's a small program developed by Thac Duong and Tim Shaw for downloading GEO data.
+Example script for downloading GEO data
+Developed by Thac Duong and Tim Shaw timothy.shaw@moffitt.org
