@@ -15,7 +15,7 @@ GSE_number = "GSE50532" # human example
 # GSE_number = "GSE66356" # mouse example
 
 #organism = "Human" # or "Mouse"
-organism = "Mouse" # or "Human"
+organism = "Human" # or "Human"
 
 # Output Folder path
 outputpath = "/Users/4472414/Documents/Current_Manuscripts/GSE_Download_Tools/Microarray_Data_Download/"
@@ -48,7 +48,10 @@ colnames(full_table)[1] = "ID"
 colnames(full_table)[2] = "Symbol"
 print(head(full_table))
 full_table <- arrange(full_table)
-
+full_table = data.frame(full_table)
+full_table$ID <- as.character(full_table$ID)
+df$ID <- as.character(df$ID)
+head(full_table)
 # convert id to symbol for expr matrix
 converted_expr_matrix <- inner_join(df, full_table, by = "ID")
 converted_expr_matrix <- relocate(converted_expr_matrix, "Symbol", .before = 1)
@@ -114,6 +117,15 @@ for (i in seq_along(original_df$geo_accession)) {
 
 final_extr_meta <- tidyr::pivot_wider(new_df, names_from = title, values_from = value)
 meta_merged <- dplyr::full_join(final_extr_meta, meta, by = "geo_accession")
+
+# check whether the matrix has been logged
+hist(converted_expr_matrix[,2])
+
+converted_expr_matrix_exp = 2^converted_expr_matrix[,-1]
+new_exp = cbind(converted_expr_matrix[,1], converted_expr_matrix_exp);
+colnames(new_exp)[1] = "ID"
+
+converted_expr_matrix = new_exp
 
 outputmatrix = paste(outputpath, "/", geo_accession, ".matrix.txt", sep="")
 outputmeta = paste(outputpath, "/", geo_accession, ".meta.txt", sep="")
