@@ -6,4 +6,5 @@ The tool can perform the following:
 3. generate a companion meta-information file.
    
 
-Developed by Thac Duong and Tim Shaw timothy.shaw@moffitt.org
+Developed by Thac Duong, Alyssa Obermayer, Joshua Davis, and Tim Shaw
+Contact Tim Shaw for questions timothy.shaw@moffitt.org
