@@ -691,6 +691,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                     id = "datasetheat",
                                                     tabPanel("Unsupervised Clustering Heatmap",
                                                              withSpinner(jqui_resizable(plotOutput("heatmap1", width = "100%", height = "1000px")), type = 6),
+                                                             p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat1","Download as SVG"),
                                                                downloadButton("dnldPlotPDF_heat1","Download as PDF")
@@ -699,6 +700,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                     ##### Custom Heatmaps
                                                     tabPanel("Custom Heatmap",
                                                              withSpinner(jqui_resizable(plotOutput("heatmap2", width = "100%", height = "1000px")), type = 6),
+                                                             p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat2","Download as SVG"),
                                                                downloadButton("dnldPlotPDF_heat2","Download as PDF")
@@ -707,6 +709,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                     ##### DEG Heatmaps
                                                     tabPanel("DEG Heatmap",
                                                              withSpinner(jqui_resizable(plotOutput("heatmap3", width = "100%", height = "1000px")), type = 6),
+                                                             p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat3","Download as SVG"),
                                                                downloadButton("dnldPlotPDF_heat3","Download as PDF")
@@ -715,6 +718,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                     ##### Average Expr Heatmaps
                                                     tabPanel("Custom Genes Average Expression Heatmap",
                                                              withSpinner(jqui_resizable(plotOutput("avgheatmap1Cust", width = "100%", height = "1000px")), type = 6),
+                                                             p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat5","Download as SVG"),
                                                                downloadButton("dnldPlotPDF_heat5","Download as PDF")
@@ -2595,7 +2599,8 @@ server <- function(input, output, session) {
                                                         row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
                                                         heatmap_legend_param = list(title = "Expression"),
                                                         border = F))
-          p
+          draw(p, padding = unit(c(50, 50, 2, 2), "mm")) # unit(c(bottom,left,right,top))
+          #p
         }
 
 
@@ -2765,7 +2770,8 @@ server <- function(input, output, session) {
                                                         row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
                                                         heatmap_legend_param = list(title = "Expression"),
                                                         border = F))
-          p
+          draw(p, padding = unit(c(50, 50, 2, 2), "mm")) # unit(c(bottom,left,right,top))
+          #p
 
           #genelist.uih <- NULL
           #genelist.ush <- NULL
@@ -2922,7 +2928,8 @@ server <- function(input, output, session) {
                                                       row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
                                                       heatmap_legend_param = list(title = "Expression"),
                                                       border = F))
-        p
+        draw(p, padding = unit(c(50, 50, 2, 2), "mm")) # unit(c(bottom,left,right,top))
+        #p
 #
         #top1 <- topgenereact2()
 #
