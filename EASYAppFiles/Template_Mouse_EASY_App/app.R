@@ -10,7 +10,7 @@ if (any(installed_packages == FALSE)) {
 }
 invisible(lapply(packages, library, character.only = TRUE))
 #bioconductor packages
-bioCpacks <- c("clusterProfiler","GSVA","limma","enrichplot")
+bioCpacks <- c("clusterProfiler","GSVA","limma","enrichplot","ComplexHeatmap")
 installed_packages_BIOC <- bioCpacks %in% rownames(installed.packages())
 if (any(installed_packages_BIOC == FALSE)) {
   BiocManager::install(bioCpacks[!installed_packages_BIOC], ask = F)
@@ -42,7 +42,7 @@ header <- TRUE
 human <- FALSE
 
 # Subsetting Feature
-Subsetting_Feature <- ""
+Subsetting_Feature <- ''
 
 # Starting Feature
 Feature_Selected <- ''
@@ -51,7 +51,7 @@ set.seed(10242022)
 
 # Does user want password Protection?
 Password_Protected <- FALSE
-PasswordSet <- "TeamScience"
+PasswordSet <- ''
 
 
 
@@ -328,7 +328,17 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
 
                                        uiOutput("rendSubsetCol"),
                                        uiOutput("rendSubsetCrit"),
-                                       uiOutput("rendGroupCol"),
+                                       conditionalPanel(condition = "input.dataset != '1'",
+                                                        uiOutput("rendGroupCol")
+                                                        ),
+                                       conditionalPanel(condition = "input.dataset == '1'",
+                                                        conditionalPanel(condition = "input.datasetheat != '5'",
+                                                                         uiOutput("rendGroupColMulti")
+                                                                         ),
+                                                        conditionalPanel(condition = "input.datasetheat == '5'",
+                                                                         uiOutput("rendGroupColAvgHeat")
+                                                                         ),
+                                                        ),
                                        ### Sidebar --------------------------------------------
                                        #### Heatmaps
 
@@ -984,7 +994,21 @@ GSEA_tab <- tabPanel("GSEA Analysis",
 
                            uiOutput("rendGSEASubsetCol"),
                            uiOutput("rendGSEASubsetCrit"),
-                           uiOutput("rendGSEAGroupCol"),
+                           conditionalPanel(condition = "input.datasetthree != '6'",
+                                            uiOutput("rendGSEAGroupCol")
+                                            ),
+                           conditionalPanel(condition = "input.datasetthree == '2'",
+                                            uiOutput("rendGSEAGroupColMulti")
+                                            ),
+                           conditionalPanel(condition = "input.datasetthree == '6'",
+                                            conditionalPanel(condition = "input.datasetssheat == '2' | input.datasetssheat == '1'",
+                                                             uiOutput("rendssGSEAGroupColMulti")
+                                                             ),
+                                            conditionalPanel(condition = "input.datasetssheat == '3'",
+                                                             uiOutput("rendssGSEAGroupColAvg")
+                                                             )
+                                            ),
+                           #uiOutput("rendGSEAGroupCol"),
 
                            ### Sidebar -----------------------------------------
                            tabsetPanel(id = "GSEA",
@@ -1134,13 +1158,15 @@ GSEA_tab <- tabPanel("GSEA Analysis",
                              #### ssGSEA Heatmaps
                              tabPanel("ssGSEA Heatmap",
                                       tabsetPanel(
+                                        id = "datasetssheat",
                                         tabPanel("ssGSEA zScore Heatmap",
                                                  p(),
                                                  withSpinner(jqui_resizable(plotOutput('ssgseaheatmap', width = "100%", height = "800px")), type = 6),
                                                  fluidRow(
                                                    downloadButton("dnldPlotSVG_ssgseaHeat","Download as SVG"),
                                                    downloadButton("dnldPlotPDF_ssgseaHeat","Download as PDF")
-                                                 )
+                                                 ),
+                                                 value = 1
                                         ),
                                         tabPanel("ssGSEA Raw Difference Heatmap",
                                                  p(),
@@ -1148,7 +1174,8 @@ GSEA_tab <- tabPanel("GSEA Analysis",
                                                  fluidRow(
                                                    downloadButton("dnldPlotSVG_ssgseaHeat2","Download as SVG"),
                                                    downloadButton("dnldPlotPDF_ssgseaHeat2","Download as PDF")
-                                                 )
+                                                 ),
+                                                 value = 2
                                         ),
                                         tabPanel("Average Raw Difference ssGSEA Heatmap",
                                                  p(),
@@ -1156,7 +1183,8 @@ GSEA_tab <- tabPanel("GSEA Analysis",
                                                  fluidRow(
                                                    downloadButton("dnldPlotSVG_ssgseaHeat3","Download as SVG"),
                                                    downloadButton("dnldPlotPDF_ssgseaHeat3","Download as PDF")
-                                                 )
+                                                 ),
+                                                 value = 3
                                         )
                                       ),
                                       value = 6)
@@ -1301,13 +1329,58 @@ server <- function(input, output, session) {
                     selected = Feature_Selected)
 
       })
+
       observeEvent(input$DEGGroupCol, {
         updateSelectInput(session, "GroupCol",selected = isolate(input$DEGGroupCol))
       })
       observeEvent(input$GSEAGroupCol, {
         updateSelectInput(session, "GroupCol",selected = isolate(input$GSEAGroupCol))
       })
+      observeEvent(input$GroupColAvgHeat, {
+        updateSelectInput(session, "GroupCol",selected = isolate(input$GroupColAvgHeat))
+      })
+      observeEvent(input$ssGSEAGroupColAvg, {
+        updateSelectInput(session, "GroupCol",selected = isolate(input$ssGSEAGroupColAvg))
+      })
       observeEvent(input$GroupCol,{metacol_reactVal(input$GroupCol)})
+      output$rendGroupColMulti <- renderUI({
+
+        req(input$SubsetCol)
+        FeatureChoices <- c("Select All Samples",suppressWarnings(column_type_check(meta,"character"))[-1])
+        if (input$SubsetCol != "Select All Samples") {
+          FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$SubsetCol)]
+        }
+        selectInput("GroupColMulti","Select Annotation Data:",
+                    choices = FeatureChoices,
+                    selected = Feature_Selected,
+                    multiple = T)
+
+      })
+      output$rendGroupColAvgHeat <- renderUI({
+
+        req(input$SubsetCol)
+        FeatureChoices <- c("Select All Samples",suppressWarnings(column_type_check(meta,"character"))[-1])
+        if (input$SubsetCol != "Select All Samples") {
+          FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$SubsetCol)]
+        }
+        selectInput("GroupColAvgHeat","Select Annotation Data:",
+                    choices = FeatureChoices,
+                    selected = Feature_Selected)
+
+      })
+      observeEvent(input$GroupCol, ignoreInit = TRUE, {
+        updateSelectInput(session, "GroupColAvgHeat",selected = isolate(input$GroupCol))
+      })
+      observeEvent(input$DEGGroupCol, ignoreInit = TRUE, {
+        updateSelectInput(session, "GroupColAvgHeat",selected = isolate(input$DEGGroupCol))
+      })
+      observeEvent(input$GSEAGroupCol, ignoreInit = TRUE, {
+        updateSelectInput(session, "GroupColAvgHeat",selected = isolate(input$GSEAGroupCol))
+      })
+      observeEvent(input$ssGSEAGroupColAvg, {
+        updateSelectInput(session, "GroupColAvgHeat",selected = isolate(input$ssGSEAGroupColAvg))
+      })
+      observeEvent(input$GroupColAvgHeat,{metacol_reactVal(input$GroupColAvgHeat)})
 
       ## DEG -----------------------------------------------------------------------
       output$rendDEGSubsetCol <- renderUI({
@@ -1364,6 +1437,12 @@ server <- function(input, output, session) {
       observeEvent(input$GSEAGroupCol, ignoreInit = TRUE, {
         updateSelectInput(session, "DEGGroupCol",selected = isolate(input$GSEAGroupCol))
       })
+      observeEvent(input$GroupColAvgHeat, {
+        updateSelectInput(session, "DEGGroupCol",selected = isolate(input$GroupColAvgHeat))
+      })
+      observeEvent(input$ssGSEAGroupColAvg, {
+        updateSelectInput(session, "DEGGroupCol",selected = isolate(input$ssGSEAGroupColAvg))
+      })
       observeEvent(input$DEGGroupCol,{metacol_reactVal(input$DEGGroupCol)})
 
       ## GSEA ----------------------------------------------------------------------
@@ -1410,7 +1489,7 @@ server <- function(input, output, session) {
         if (input$GSEASubsetCol != "Select All Samples") {
           FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$GSEASubsetCol)]
         }
-        selectInput("GSEAGroupCol","Select Grouping Column:",
+        selectInput("GSEAGroupCol","Select GSEA Grouping Column:",
                     choices = FeatureChoices,
                     selected = metacol_reactVal())
 
@@ -1421,7 +1500,64 @@ server <- function(input, output, session) {
       observeEvent(input$DEGGroupCol, ignoreInit = TRUE, {
         updateSelectInput(session, "GSEAGroupCol",selected = isolate(input$DEGGroupCol))
       })
+      observeEvent(input$GroupColAvgHeat, {
+        updateSelectInput(session, "GSEAGroupCol",selected = isolate(input$GroupColAvgHeat))
+      })
+      observeEvent(input$ssGSEAGroupColAvg, {
+        updateSelectInput(session, "GSEAGroupCol",selected = isolate(input$ssGSEAGroupColAvg))
+      })
       observeEvent(input$GSEAGroupCol,{metacol_reactVal(input$GSEAGroupCol)})
+      output$rendssGSEAGroupColAvg <- renderUI({
+
+        req(input$GSEASubsetCol)
+        FeatureChoices <- c("Select All Samples",suppressWarnings(column_type_check(meta,"character"))[-1])
+        if (input$GSEASubsetCol != "Select All Samples") {
+          FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$GSEASubsetCol)]
+        }
+        selectInput("ssGSEAGroupColAvg","Select Grouping Data:",
+                    choices = FeatureChoices,
+                    selected = metacol_reactVal())
+
+      })
+      observeEvent(input$GroupCol, ignoreInit = TRUE, {
+        updateSelectInput(session, "ssGSEAGroupColAvg",selected = isolate(input$GroupCol))
+      })
+      observeEvent(input$DEGGroupCol, ignoreInit = TRUE, {
+        updateSelectInput(session, "ssGSEAGroupColAvg",selected = isolate(input$DEGGroupCol))
+      })
+      observeEvent(input$GroupColAvgHeat, {
+        updateSelectInput(session, "ssGSEAGroupColAvg",selected = isolate(input$GroupColAvgHeat))
+      })
+      observeEvent(input$ssGSEAGroupColAvg, {
+        updateSelectInput(session, "ssGSEAGroupColAvg",selected = isolate(input$ssGSEAGroupColAvg))
+      })
+      observeEvent(input$ssGSEAGroupColAvg,{metacol_reactVal(input$ssGSEAGroupColAvg)})
+      output$rendssGSEAGroupColMulti <- renderUI({
+
+        req(input$GSEASubsetCol)
+        FeatureChoices <- c("Select All Samples",suppressWarnings(column_type_check(meta,"character"))[-1])
+        if (input$GSEASubsetCol != "Select All Samples") {
+          FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$GSEASubsetCol)]
+        }
+        selectInput("ssGSEAGroupColMulti","Select Annotation Data:",
+                    choices = FeatureChoices,
+                    selected = metacol_reactVal(),
+                    multiple = T)
+
+      })
+      output$rendGSEAGroupColMulti <- renderUI({
+
+        req(input$GSEASubsetCol)
+        FeatureChoices <- c("Select All Samples",suppressWarnings(column_type_check(meta,"character"))[-1])
+        if (input$GSEASubsetCol != "Select All Samples") {
+          FeatureChoices <- FeatureChoices[which(FeatureChoices!=input$GSEASubsetCol)]
+        }
+        selectInput("GSEAGroupColMulti","Select Annotation Data:",
+                    choices = FeatureChoices,
+                    selected = metacol_reactVal(),
+                    multiple = T)
+
+      })
 
 
       meta_react <- reactive({
@@ -1660,7 +1796,7 @@ server <- function(input, output, session) {
         meta <- meta_react()
         metacol <- metacol_reactVal()
         metagroups <- unique(meta[,metacol])
-        selectInput("comparisonB", "Comparison: GroupA",
+        selectInput("comparisonB", "Comparison: GroupB",
                     choices = metagroups, selected = metagroups[2])
         #if (ncol(meta) == 2){
         #  selectInput("comparisonB", "Comparison: GroupB",
@@ -2365,32 +2501,31 @@ server <- function(input, output, session) {
 
       ####----MVG Heatmap----####
 
-      ## MVG heatmap reactive
-      MVGheatmap_react <- reactive ({
+      heat_colAnn <- reactive({
+
+        if (isTruthy(input$GroupColMulti)) {
+          meta <- meta_react()
+          rownames(meta) <- meta[,1]
+          meta_sub <- meta[,input$GroupColMulti, drop = F]
+          meta_sub[,input$GroupColMulti] <- as.data.frame(lapply(meta_sub[,input$GroupColMulti, drop = F], factor))
+          colAnn <- ComplexHeatmap::HeatmapAnnotation(df = meta_sub,
+                                                      name = input$GroupColMulti,
+                                                      which = 'col'
+          )
+          colAnn
+        } else {
+          colAnn <- NULL
+          colAnn
+        }
+
+      })
+
+      MVG_heat_data <- reactive({
 
         top_probes <- input$NumFeatures
-        row_names_choice <- input$ShowRowNames1
-        col_names_choice <- input$ShowColNames1
-        row_font <- input$heatmapFont2.r
-        col_font <- input$heatmapFont2.c
         clust_method <- input$ClusteringMethod
-        color_choice <- input$ColorPalette1
         var_type <- input$VarianceMeasure
-        clust_cols_opt <- input$clustcolsMVG
-        clust_rows_opt <- input$clustrowsMVG
-        meta <- meta_react()
-        metacol <- metacol_reactVal()
-        #metacol <- metacol_react()
         expr <- expr_react()
-
-        #if (ncol(meta) > 2) {
-        #  metacol <- input$MVGheatAnnoCol
-        #}
-        #else if (ncol(meta) == 2) {
-        #  metacol <- colnames(meta)[2]
-        #}
-
-
         exp <- expr
         mad <- NULL
         var <- NULL
@@ -2402,7 +2537,6 @@ server <- function(input, output, session) {
           out <- cbind(names(mad), mad[names(mad)], exp[names(mad),])
           colnames(out) <- c("Gene", "MAD", colnames(exp))
           dataset <- exp[names(mad),]
-          variable_gene_list <- names(mad)
         }
         else if (var_type == "VAR"){
           var <- apply(log2(exp + 1), 1, var)
@@ -2411,7 +2545,6 @@ server <- function(input, output, session) {
           out <- cbind(names(var), var[names(var)], exp[names(var),])
           colnames(out) <- c("Gene", "VAR", colnames(exp))
           dataset <- exp[names(var),]
-          variable_gene_list <- names(var)
         }
         else if (var_type == "CV"){
           cv <- apply(log2(exp + 1), 1, cv)
@@ -2420,89 +2553,167 @@ server <- function(input, output, session) {
           out <- cbind(names(cv), cv[names(cv)], exp[names(cv),])
           colnames(out) <- c("Gene", "CV", colnames(exp))
           dataset <- exp[names(cv),]
-          variable_gene_list <- names(cv)
         }
-
         dataset <- log2(dataset + 1)
         zdataset <- apply(dataset, 1, scale)
         zdataset <- apply(zdataset, 1, rev)
         colnames(zdataset) <- names(dataset)
         dataset <- as.matrix(zdataset)
         dataset[is.na(dataset)] <- 0
-
         dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
-        minimum = -5;
-        maximum = 5;
-        if (abs(min(dataset)) > abs(max(dataset))) {
-          dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-        } else {
-          dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        dataset
+
+      })
+
+      ## MVG heatmap reactive
+      MVGheatmap_react <- reactive ({
+
+        if (!is.null(input$GroupColMulti)) {
+          #top_probes <- input$NumFeatures
+          row_names_choice <- input$ShowRowNames1
+          col_names_choice <- input$ShowColNames1
+          row_font <- input$heatmapFont2.r
+          col_font <- input$heatmapFont2.c
+          clust_method <- input$ClusteringMethod
+          #color_choice <- input$ColorPalette1
+          #var_type <- input$VarianceMeasure
+          clust_cols_opt <- input$clustcolsMVG
+          clust_rows_opt <- input$clustrowsMVG
+          #meta <- meta_react()
+          #metacol <- metacol_reactVal()
+          #metacol <- metacol_react()
+          #expr <- expr_react()
+
+          colAnno <- heat_colAnn()
+          dataset <- MVG_heat_data()
+
+          p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                        top_annotation = colAnno,
+                                                        clustering_method_rows = clust_method,
+                                                        show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                        cluster_rows = clust_rows_opt, cluster_columns = clust_cols_opt,
+                                                        row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                        heatmap_legend_param = list(title = "Expression"),
+                                                        border = F))
+          p
         }
+
+
+        #if (ncol(meta) > 2) {
+        #  metacol <- input$MVGheatAnnoCol
+        #}
+        #else if (ncol(meta) == 2) {
+        #  metacol <- colnames(meta)[2]
+        #}
+
+
+        #exp <- expr
+        #mad <- NULL
+        #var <- NULL
+        #cv <- NULL
+        #if (var_type == "MAD"){
+        #  mad <- apply(log2(exp + 1), 1, mad)
+        #  mad <- sort(mad, decreasing = T)
+        #  mad <- head(mad, n = (top_probes +1))
+        #  out <- cbind(names(mad), mad[names(mad)], exp[names(mad),])
+        #  colnames(out) <- c("Gene", "MAD", colnames(exp))
+        #  dataset <- exp[names(mad),]
+        #  variable_gene_list <- names(mad)
+        #}
+        #else if (var_type == "VAR"){
+        #  var <- apply(log2(exp + 1), 1, var)
+        #  var <- sort(var, decreasing = T)
+        #  var <- head(var, n = (top_probes +1))
+        #  out <- cbind(names(var), var[names(var)], exp[names(var),])
+        #  colnames(out) <- c("Gene", "VAR", colnames(exp))
+        #  dataset <- exp[names(var),]
+        #  variable_gene_list <- names(var)
+        #}
+        #else if (var_type == "CV"){
+        #  cv <- apply(log2(exp + 1), 1, cv)
+        #  cv <- sort(cv, decreasing = T)
+        #  cv <- head(cv, n = (top_probes +1))
+        #  out <- cbind(names(cv), cv[names(cv)], exp[names(cv),])
+        #  colnames(out) <- c("Gene", "CV", colnames(exp))
+        #  dataset <- exp[names(cv),]
+        #  variable_gene_list <- names(cv)
+        #}
+#
+        #dataset <- log2(dataset + 1)
+        #zdataset <- apply(dataset, 1, scale)
+        #zdataset <- apply(zdataset, 1, rev)
+        #colnames(zdataset) <- names(dataset)
+        #dataset <- as.matrix(zdataset)
+        #dataset[is.na(dataset)] <- 0
+
+        #dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
+        #minimum = -5;
+        #maximum = 5;
+        #if (abs(min(dataset)) > abs(max(dataset))) {
+        #  dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+        #} else {
+        #  dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        #}
         #type <- meta[,input$MVGheatAnnoCol]
         #meta2 <- as.data.frame(as.factor(type))
-        meta2 <- meta[,c(colnames(meta)[1],metacol)]
-        meta2[,2] <- as.factor(meta2[,2])
-        meta2 <- meta2[order(meta2[,2]),]
-        rownames(meta2) <- meta2[,1]
-        meta2 <- meta2[,-1,drop = F]
-        dataset <- dataset[,rownames(meta2)]
-        bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-        #Heatmap color
-        col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-        if (color_choice == "original") {
-          HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice %in% col_sets) {
-          HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice == "Inferno") {
-          hmcols <- inferno(500)
-        }
-        else if (color_choice == "Viridis") {
-          hmcols <- viridis(500)
-        }
-        else if (color_choice == "Plasma") {
-          hmcols <- plasma(500)
-        }
-        else if (color_choice == "OmniBlueRed") {
-          hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-        }
-        else if (color_choice == "LightBlueBlackRed") {
-          hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-        }
-        else if (color_choice == "GreenBlackRed") {
-          hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-        }
-        hm <- pheatmap::pheatmap(dataset,
-                                 cluster_col = clust_cols_opt,
-                                 cluster_row = clust_rows_opt,
-                                 fontsize_row = row_font,
-                                 fontsize_col = col_font,
-                                 show_rownames = row_names_choice,
-                                 show_colnames = col_names_choice,
-                                 annotation_col = meta2,
-                                 clustering_method = clust_method,
-                                 color = hmcols,
-                                 border_color = NA)
-
-        hm
+        #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+        #meta2[,2] <- as.factor(meta2[,2])
+        #meta2 <- meta2[order(meta2[,2]),]
+        #rownames(meta2) <- meta2[,1]
+        #meta2 <- meta2[,-1,drop = F]
+        #dataset <- dataset[,rownames(meta2)]
+        #bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        ##Heatmap color
+        #col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #if (color_choice == "original") {
+        #  HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice %in% col_sets) {
+        #  HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice == "Inferno") {
+        #  hmcols <- inferno(500)
+        #}
+        #else if (color_choice == "Viridis") {
+        #  hmcols <- viridis(500)
+        #}
+        #else if (color_choice == "Plasma") {
+        #  hmcols <- plasma(500)
+        #}
+        #else if (color_choice == "OmniBlueRed") {
+        #  hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #}
+        #else if (color_choice == "LightBlueBlackRed") {
+        #  hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #}
+        #else if (color_choice == "GreenBlackRed") {
+        #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #}
+        #hm <- pheatmap::pheatmap(dataset,
+        #                         cluster_col = clust_cols_opt,
+        #                         cluster_row = clust_rows_opt,
+        #                         fontsize_row = row_font,
+        #                         fontsize_col = col_font,
+        #                         show_rownames = row_names_choice,
+        #                         show_colnames = col_names_choice,
+        #                         annotation_col = meta2,
+        #                         clustering_method = clust_method,
+        #                         color = hmcols,
+        #                         border_color = NA)
+#
+        #hm
 
       })
 
       ####----Custom Heatmap----####
 
-      #Custom heat map reactive
-      CustomHeatmap_react <- reactive({
-
+      Custom_heat_data <- reactive({
         if (length(input$heatmapGeneSelec) >= 2 || length(input$userheatgenes) >= 1) {
           expr <- expr_react()
           meta <- meta_react()
           metacol <- metacol_reactVal()
-          row_names_choice <- input$ShowRowNames2
-          col_names_choice <- input$ShowColNames2
-          clust_col_choice <- input$ClusColOptCust
           genelist.uih <- NULL
           genelist.ush <- NULL
           genelist.uih2 <- NULL
@@ -2516,13 +2727,6 @@ server <- function(input, output, session) {
           exp <- expr[heatgenes,usersamps]
           meta <- meta[which(meta[,1] %in% usersamps),]
 
-          #if (ncol(meta) > 2) {
-          #  metacol <- input$CustomheatAnnoCol
-          #}
-          #else if (ncol(meta) == 2) {
-          #  metacol <- colnames(meta)[2]
-          #}
-
           dataset <- exp
           dataset <- log2(dataset + 1)
           zdataset <- apply(dataset, 1, scale)
@@ -2530,104 +2734,144 @@ server <- function(input, output, session) {
           colnames(zdataset) <- names(dataset)
           dataset <- as.matrix(zdataset)
           dataset[is.na(dataset)] <- 0
-
-
           dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
-          minimum = -5;
-          maximum = 5;
-          if (abs(min(dataset)) > abs(max(dataset))) {
-            dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-          } else {
-            dataset[dataset > abs(min(dataset))] = abs(min(dataset))
-          }
-          meta2 <- meta[,c(colnames(meta)[1],metacol)]
-          meta2[,2] <- as.factor(meta2[,2])
-          meta2 <- meta2[order(meta2[,2]),]
-          rownames(meta2) <- meta2[,1]
-          meta2 <- meta2[,-1,drop = F]
-          dataset <- dataset[,rownames(meta2)]
-          bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-          #Heatmap color
-          color_choice <- input$ColorPalette2
-          col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-          if (color_choice == "original") {
-            HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-            hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-          }
-          else if (color_choice %in% col_sets) {
-            HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-            hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-          }
-          else if (color_choice == "Inferno") {
-            hmcols <- inferno(500)
-          }
-          else if (color_choice == "Viridis") {
-            hmcols <- viridis(500)
-          }
-          else if (color_choice == "Plasma") {
-            hmcols <- plasma(500)
-          }
-          else if (color_choice == "OmniBlueRed") {
-            hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-          }
-          else if (color_choice == "LightBlueBlackRed") {
-            hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-          }
-          else if (color_choice == "GreenBlackRed") {
-            hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-          }
-          dataset <- dataset[match(heatgenes, rownames(dataset)),]
+          dataset
+        }
 
-          hm <- pheatmap::pheatmap(dataset,
-                                   cluster_col = clust_col_choice,
-                                   cluster_row = input$ClusRowOptCust,
-                                   fontsize_row = input$heatmapFont3.r,
-                                   fontsize_col = input$heatmapFont3.c,
-                                   show_rownames = row_names_choice ,
-                                   show_colnames = col_names_choice,
-                                   annotation_col = meta2,
-                                   clustering_method = input$ClusteringMethodCust,
-                                   color=hmcols,
-                                   border_color = NA)
+      })
+
+      #Custom heat map reactive
+      CustomHeatmap_react <- reactive({
+
+        if (length(input$heatmapGeneSelec) >= 2 || length(input$userheatgenes) >= 1) {
+          #expr <- expr_react()
+          #meta <- meta_react()
+          #metacol <- metacol_reactVal()
+          row_names_choice <- input$ShowRowNames2
+          col_names_choice <- input$ShowColNames2
+          clust_cols_opt <- input$ClusColOptCust
+          clust_rows_opt <- input$ClusRowOptCust
+          row_font <- input$heatmapFont3.r
+          col_font <- input$heatmapFont3.c
+          clust_method <- input$ClusteringMethodCust
+          colAnno <- heat_colAnn()
+          dataset <- Custom_heat_data()
+
+          p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                        top_annotation = colAnno,
+                                                        clustering_method_rows = clust_method,
+                                                        show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                        cluster_rows = clust_rows_opt, cluster_columns = clust_cols_opt,
+                                                        row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                        heatmap_legend_param = list(title = "Expression"),
+                                                        border = F))
+          p
+
+          #genelist.uih <- NULL
+          #genelist.ush <- NULL
+          #genelist.uih2 <- NULL
+          #genelist.ush <- input$heatmapGeneSelec
+          #genelist.uih <- unlist(strsplit(input$userheatgenes, " "))
+          ##genelist.uih2 <- unlist(strsplit(input$userheatgenes, "\t"))
+          #heatgenes <- c(genelist.ush,genelist.uih,genelist.uih2)
+          #heatgenes <- heatgenes[!is.na(heatgenes)]
+          #heatgenes <- heatgenes[!is.null(heatgenes)]
+          #usersamps <- input$userheatsamp2
+          #exp <- expr[heatgenes,usersamps]
+          #meta <- meta[which(meta[,1] %in% usersamps),]
+
+          #if (ncol(meta) > 2) {
+          #  metacol <- input$CustomheatAnnoCol
+          #}
+          #else if (ncol(meta) == 2) {
+          #  metacol <- colnames(meta)[2]
+          #}
+
+          #dataset <- exp
+          #dataset <- log2(dataset + 1)
+          #zdataset <- apply(dataset, 1, scale)
+          #zdataset <- apply(zdataset, 1, rev)
+          #colnames(zdataset) <- names(dataset)
+          #dataset <- as.matrix(zdataset)
+          #dataset[is.na(dataset)] <- 0
+#
+#
+          #dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
+          #minimum = -5;
+          #maximum = 5;
+          #if (abs(min(dataset)) > abs(max(dataset))) {
+          #  dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+          #} else {
+          #  dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+          #}
+          #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+          #meta2[,2] <- as.factor(meta2[,2])
+          #meta2 <- meta2[order(meta2[,2]),]
+          #rownames(meta2) <- meta2[,1]
+          #meta2 <- meta2[,-1,drop = F]
+          #dataset <- dataset[,rownames(meta2)]
+          #bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+          ##Heatmap color
+          #color_choice <- input$ColorPalette2
+          #col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+          #if (color_choice == "original") {
+          #  HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+          #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+          #}
+          #else if (color_choice %in% col_sets) {
+          #  HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+          #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+          #}
+          #else if (color_choice == "Inferno") {
+          #  hmcols <- inferno(500)
+          #}
+          #else if (color_choice == "Viridis") {
+          #  hmcols <- viridis(500)
+          #}
+          #else if (color_choice == "Plasma") {
+          #  hmcols <- plasma(500)
+          #}
+          #else if (color_choice == "OmniBlueRed") {
+          #  hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+          #}
+          #else if (color_choice == "LightBlueBlackRed") {
+          #  hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+          #}
+          #else if (color_choice == "GreenBlackRed") {
+          #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+          #}
+          #dataset <- dataset[match(heatgenes, rownames(dataset)),]
+#
+          #hm <- pheatmap::pheatmap(dataset,
+          #                         cluster_col = clust_col_choice,
+          #                         cluster_row = input$ClusRowOptCust,
+          #                         fontsize_row = input$heatmapFont3.r,
+          #                         fontsize_col = input$heatmapFont3.c,
+          #                         show_rownames = row_names_choice ,
+          #                         show_colnames = col_names_choice,
+          #                         annotation_col = meta2,
+          #                         clustering_method = input$ClusteringMethodCust,
+          #                         color=hmcols,
+          #                         border_color = NA)
 
         }
 
-        hm
+        #hm
 
       })
 
       ####----DEG Heatmap----####
 
-      # DEG heatmap reactive
-      DEGHeatmap_react <- reactive({
+      DEG_heat_data <- reactive({
+
 
         # UI Inputs
         meta <- meta_react()
-        metacol <- metacol_reactVal()
         expr <- expr_react()
-        row_names_choice <- input$ShowRowNames3     #choose to show row names or not
-        col_names_choice <- input$ShowColNames3
-        #A_choice <- input$comparisonA2_h            #Comparison group A
-        #B_choice <- input$comparisonB2_h            #Comparison group B
         FC_cutoff <- input$fc_cutoff_h              #FC cutoff for top gene selection
         P_cutoff <- input$p_cutoff_h                #P-value cutoff for top gene selections
         top_probes <- input$top_x_h                 #Number of top genes to show on heatmap
-        clust_method <- input$ClusteringMethod_degh #Cluster method for heatmap
-        col_font <- input$heatmapFont3.c.deg        #Heatmap column font size
-        row_font <- input$heatmapFont3.r.deg        #Heatmap row font size
-        color_choice <- input$ColorPalette3
-        clust_row_choice <- input$ClusRowOptDEG
-        clust_col_choice <- input$ClusColOptDEG
-
         top1 <- topgenereact2()
-
-        #if (ncol(meta) > 2) {
-        #  metacol <- input$MetaColDEGHeat
-        #}
-        #else if (ncol(meta) == 2) {
-        #  metacol <- colnames(meta)[2]
-        #}
-
         top_above_cutoff <- top1[which(top1$logFC > abs(FC_cutoff) & top1$P.Value < P_cutoff),]
 
         # Get gene list from Top table
@@ -2641,68 +2885,130 @@ server <- function(input, output, session) {
         colnames(zdataset) <- names(dataset)
         dataset <- as.matrix(zdataset)
         dataset[is.na(dataset)] <- 0
-
         dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
-        minimum = -5;
-        maximum = 5;
-        if (abs(min(dataset)) > abs(max(dataset))) {
-          dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-        } else {
-          dataset[dataset > abs(min(dataset))] = abs(min(dataset))
-        }
-        meta2 <- meta[,c(colnames(meta)[1],metacol)]
-        meta2[,2] <- as.factor(meta2[,2])
-        meta2 <- meta2[order(meta2[,2]),]
-        rownames(meta2) <- meta2[,1]
-        meta2 <- meta2[,-1,drop = F]
-        dataset <- dataset[,rownames(meta2)]
-        bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-        #Heatmap color
-        col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-        if (color_choice == "original") {
-          HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice %in% col_sets) {
-          HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice == "Inferno") {
-          hmcols <- inferno(500)
-        }
-        else if (color_choice == "Viridis") {
-          hmcols <- viridis(500)
-        }
-        else if (color_choice == "Plasma") {
-          hmcols <- plasma(500)
-        }
-        else if (color_choice == "OmniBlueRed") {
-          hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-        }
-        else if (color_choice == "LightBlueBlackRed") {
-          hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-        }
-        else if (color_choice == "GreenBlackRed") {
-          hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-        }
-        # Heatmap
-        hm <- pheatmap::pheatmap(dataset,
-                                 cluster_col = clust_col_choice,
-                                 cluster_row = clust_row_choice,
-                                 fontsize_row = row_font,
-                                 fontsize_col = col_font,
-                                 show_rownames = row_names_choice,
-                                 show_colnames = col_names_choice,
-                                 clustering_method = clust_method,
-                                 color=hmcols,
-                                 annotation_col = meta2,
-                                 angle_col = 90,
-                                 border_color = NA)
-        hm
+
+      })
+
+      # DEG heatmap reactive
+      DEGHeatmap_react <- reactive({
+
+        ## UI Inputs
+        #meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        #expr <- expr_react()
+        row_names_choice <- input$ShowRowNames3     #choose to show row names or not
+        col_names_choice <- input$ShowColNames3
+        ##A_choice <- input$comparisonA2_h            #Comparison group A
+        ##B_choice <- input$comparisonB2_h            #Comparison group B
+        #FC_cutoff <- input$fc_cutoff_h              #FC cutoff for top gene selection
+        #P_cutoff <- input$p_cutoff_h                #P-value cutoff for top gene selections
+        #top_probes <- input$top_x_h                 #Number of top genes to show on heatmap
+        clust_method <- input$ClusteringMethod_degh #Cluster method for heatmap
+        col_font <- input$heatmapFont3.c.deg        #Heatmap column font size
+        row_font <- input$heatmapFont3.r.deg        #Heatmap row font size
+        #color_choice <- input$ColorPalette3
+        clust_rows_opt <- input$ClusRowOptDEG
+        clust_cols_opt <- input$ClusColOptDEG
+
+        colAnno <- heat_colAnn()
+        dataset <- DEG_heat_data()
+
+
+        p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                      top_annotation = colAnno,
+                                                      clustering_method_rows = clust_method,
+                                                      show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                      cluster_rows = clust_rows_opt, cluster_columns = clust_cols_opt,
+                                                      row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                      heatmap_legend_param = list(title = "Expression"),
+                                                      border = F))
+        p
+#
+        #top1 <- topgenereact2()
+#
+        ##if (ncol(meta) > 2) {
+        ##  metacol <- input$MetaColDEGHeat
+        ##}
+        ##else if (ncol(meta) == 2) {
+        ##  metacol <- colnames(meta)[2]
+        ##}
+#
+        #top_above_cutoff <- top1[which(top1$logFC > abs(FC_cutoff) & top1$P.Value < P_cutoff),]
+#
+        ## Get gene list from Top table
+        #genelist <- rownames(top_above_cutoff)[c(1:top_probes)]
+#
+        ## Heatmap Calculations
+        #dataset <- expr[which(rownames(expr) %in% genelist),]
+        #dataset <- log2(dataset + 1)
+        #zdataset <- apply(dataset, 1, scale)
+        #zdataset <- apply(zdataset, 1, rev)
+        #colnames(zdataset) <- names(dataset)
+        #dataset <- as.matrix(zdataset)
+        #dataset[is.na(dataset)] <- 0
+#
+        #dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
+        #minimum = -5;
+        #maximum = 5;
+        #if (abs(min(dataset)) > abs(max(dataset))) {
+        #  dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+        #} else {
+        #  dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        #}
+        #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+        #meta2[,2] <- as.factor(meta2[,2])
+        #meta2 <- meta2[order(meta2[,2]),]
+        #rownames(meta2) <- meta2[,1]
+        #meta2 <- meta2[,-1,drop = F]
+        #dataset <- dataset[,rownames(meta2)]
+        #bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        ##Heatmap color
+        #col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #if (color_choice == "original") {
+        #  HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice %in% col_sets) {
+        #  HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice == "Inferno") {
+        #  hmcols <- inferno(500)
+        #}
+        #else if (color_choice == "Viridis") {
+        #  hmcols <- viridis(500)
+        #}
+        #else if (color_choice == "Plasma") {
+        #  hmcols <- plasma(500)
+        #}
+        #else if (color_choice == "OmniBlueRed") {
+        #  hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #}
+        #else if (color_choice == "LightBlueBlackRed") {
+        #  hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #}
+        #else if (color_choice == "GreenBlackRed") {
+        #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #}
+        ## Heatmap
+        #hm <- pheatmap::pheatmap(dataset,
+        #                         cluster_col = clust_col_choice,
+        #                         cluster_row = clust_row_choice,
+        #                         fontsize_row = row_font,
+        #                         fontsize_col = col_font,
+        #                         show_rownames = row_names_choice,
+        #                         show_colnames = col_names_choice,
+        #                         clustering_method = clust_method,
+        #                         color=hmcols,
+        #                         annotation_col = meta2,
+        #                         angle_col = 90,
+        #                         border_color = NA)
+        #hm
 
       })
 
       ####----Avg Expr Heatmap----####
+
 
       #Custom average heatmap reactive
       AvgExprHeatmap_react <- reactive({
@@ -2827,30 +3133,49 @@ server <- function(input, output, session) {
 
       })
 
-      ssgseaheatmap_react <- reactive({
+      meta_factored <- apply(meta,2,function(x) factor(x))
+      meta_factored <- as.data.frame(lapply(meta, factor))
 
-        row_names_choice <- input$ShowRowNames1SSheat
-        col_names_choice <- input$ShowColNamesSSheat
-        row_font <- input$heatmapFont1.r
-        col_font <- input$heatmapFont1.c
+      ssgsea_heat_anno <- reactive({
+
+        if (isTruthy(input$ssGSEAGroupColMulti)) {
+          meta <- meta_react()
+          dataset <- ssgsea_heat_data()
+          meta <- meta[which(meta[,1] %in% colnames(dataset)),]
+          rownames(meta) <- meta[,1]
+          meta_sub <- meta[,input$ssGSEAGroupColMulti, drop = F]
+          meta_sub[,input$ssGSEAGroupColMulti] <- as.data.frame(lapply(meta_sub[,input$ssGSEAGroupColMulti, drop = F], factor))
+
+          colAnn <- ComplexHeatmap::HeatmapAnnotation(df = meta_sub,
+                                                      name = input$ssGSEAGroupColMulti,
+                                                      which = 'col'
+          )
+          colAnn
+        } else {
+          colAnn <- NULL
+          colAnn
+        }
+
+      })
+
+      ssgsea_heat_data <- reactive({
+
+        #row_names_choice <- input$ShowRowNames1SSheat
+        #col_names_choice <- input$ShowColNamesSSheat
+        #row_font <- input$heatmapFont1.r
+        #col_font <- input$heatmapFont1.c
         meta <- meta_react()
-        metacol <- metacol_reactVal()
+        #metacol <- metacol_reactVal()
         A <- expr_mat_react()
-        #if (ncol(meta) > 2) {
-        #  metacol <- input$GSEAmetaCol
+        #if (is.null(input$ClusterMethodSSheat) == TRUE) {
+        #  clust_method <- 'complete'
         #}
-        #else if (ncol(meta) == 2) {
-        #  metacol <- colnames(meta)[2]
+        #else if (is.null(input$ClusterMethodSSheat) == FALSE) {
+        #  clust_method <- input$ClusterMethodSSheat
         #}
-        if (is.null(input$ClusterMethodSSheat) == TRUE) {
-          clust_method <- 'complete'
-        }
-        else if (is.null(input$ClusterMethodSSheat) == FALSE) {
-          clust_method <- input$ClusterMethodSSheat
-        }
-        color_choice <- input$ColorPalette_gseaHeat
-        clust_cols_opt <- input$clustcolsSSheat
-        clust_rows_opt <- input$clustrowsSSheat
+        #color_choice <- input$ColorPalette_gseaHeat
+        #clust_cols_opt <- input$clustcolsSSheat
+        #clust_rows_opt <- input$clustrowsSSheat
         scoreMethod <- input$ssGSEAtypeHeat
 
         if (is.null(input$ssgseaHeatGS) == TRUE) {
@@ -2884,100 +3209,168 @@ server <- function(input, output, session) {
         final_gs <- intersect(geneset_names,neworder_gs)
 
         ssgsea4 <- ssgsea4[final_gs,]
-
-        minimum = min(ssgsea4)
-        maximum = max(ssgsea4)
-        if (abs(min(ssgsea4)) > abs(max(ssgsea4))) {
-          ssgsea4[ssgsea4 < -abs(max(ssgsea4))] = -abs(max(ssgsea4))
-        } else {
-          ssgsea4[ssgsea4 > abs(min(ssgsea4))] = abs(min(ssgsea4))
-        }
-        bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-        #Heatmap color
-        col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-        if (color_choice == "original") {
-          HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice %in% col_sets) {
-          HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice == "Inferno") {
-          hmcols <- inferno(500)
-        }
-        else if (color_choice == "Viridis") {
-          hmcols <- viridis(500)
-        }
-        else if (color_choice == "Plasma") {
-          hmcols <- plasma(500)
-        }
-        else if (color_choice == "OmniBlueRed") {
-          hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-        }
-        else if (color_choice == "LightBlueBlackRed") {
-          hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-        }
-        else if (color_choice == "GreenBlackRed") {
-          hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-        }
-
-        meta2 <- meta[,c(colnames(meta)[1],metacol)]
-        meta2[,2] <- as.factor(meta2[,2])
-        meta2 <- meta2[order(meta2[,2]),]
-        rownames(meta2) <- meta2[,1]
-        meta2 <- meta2[,-1,drop = F]
-        ssgsea4 <- ssgsea4[,rownames(meta2)]
-
-        #meta <- meta[order(meta[,2]),]
-        #type <- meta[,2]
-        #meta2 <- as.data.frame(type)
-        #rownames(meta2) <- meta[,1]
-
-        hm <- pheatmap::pheatmap(ssgsea4,
-                                 cluster_col = clust_cols_opt,
-                                 cluster_row = clust_rows_opt,
-                                 fontsize_row = row_font,
-                                 fontsize_col = col_font,
-                                 show_rownames = row_names_choice,
-                                 show_colnames = col_names_choice,
-                                 annotation_col = meta2,
-                                 clustering_method = clust_method,
-                                 color = hmcols)
-
-        hm
-
+        ssgsea4
+        #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+        #meta2[,2] <- as.factor(meta2[,2])
+        #meta2 <- meta2[order(meta2[,2]),]
+        #rownames(meta2) <- meta2[,1]
+        #meta2 <- meta2[,-1,drop = F]
+        #ssgsea4 <- ssgsea4[,rownames(meta2)]
 
       })
 
-      ssgseaheatmap2_react <- reactive({
+      ssgseaheatmap_react <- reactive({
 
         row_names_choice <- input$ShowRowNames1SSheat
         col_names_choice <- input$ShowColNamesSSheat
         row_font <- input$heatmapFont1.r
         col_font <- input$heatmapFont1.c
+        clust_cols_opt <- input$clustcolsSSheat
+        clust_rows_opt <- input$clustrowsSSheat
+        if (is.null(input$ClusterMethodSSheat) == TRUE) {
+          clust_method <- 'complete'
+        } else if (is.null(input$ClusterMethodSSheat) == FALSE) {
+          clust_method <- input$ClusterMethodSSheat
+        }
+
+        colAnno <- ssgsea_heat_anno()
+        dataset <- ssgsea_heat_data()
+
+        p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                      top_annotation = colAnno,
+                                                      clustering_method_rows = clust_method,
+                                                      show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                      cluster_rows = clust_rows_opt, cluster_columns = clust_cols_opt,
+                                                      row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                      heatmap_legend_param = list(title = "ssGSEA Score"),
+                                                      border = F))
+        p
+
+        #meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        #A <- expr_mat_react()
+        ##if (ncol(meta) > 2) {
+        ##  metacol <- input$GSEAmetaCol
+        ##}
+        ##else if (ncol(meta) == 2) {
+        ##  metacol <- colnames(meta)[2]
+        ##}
+        #if (is.null(input$ClusterMethodSSheat) == TRUE) {
+        #  clust_method <- 'complete'
+        #}
+        #else if (is.null(input$ClusterMethodSSheat) == FALSE) {
+        #  clust_method <- input$ClusterMethodSSheat
+        #}
+        #color_choice <- input$ColorPalette_gseaHeat
+        #clust_cols_opt <- input$clustcolsSSheat
+        #clust_rows_opt <- input$clustrowsSSheat
+        #scoreMethod <- input$ssGSEAtypeHeat
+#
+        #if (is.null(input$ssgseaHeatGS) == TRUE) {
+        #  #geneset_names <- gs_names_start
+        #  geneset_names <- ssGSEA_Heat_GS()
+        #}
+        #else if (is.null(input$ssgseaHeatGS) == FALSE) {
+        #  geneset_names <- input$ssgseaHeatGS
+        #}
+        #samples_chosen <- input$userheatsampSS
+#
+        #A <- A[,samples_chosen]
+        #meta <- meta[which(meta[,1] %in% samples_chosen),]
+#
+        #if (input$tables == 1) {
+        #  GS <- gs[geneset_names]
+        #}
+        #if (input$tables == 3) {
+        #  GS <- gs2[geneset_names]
+        #}
+        #if (input$tables == 5) {
+        #  GS <- RDataListGen()[geneset_names]
+        #}
+        #ssgsea <- gsva(A, GS, method = scoreMethod, verbose = F)
+        #ssgsea2 = t(ssgsea)
+        #ssgsea3 = apply(ssgsea2, 2, scale);
+        #ssgsea4 = apply(ssgsea3, 1, rev)
+        #colnames(ssgsea4) = rownames(ssgsea2)
+#
+        #neworder_gs <- rownames(ssgsea4)
+        #final_gs <- intersect(geneset_names,neworder_gs)
+#
+        #ssgsea4 <- ssgsea4[final_gs,]
+#
+        #minimum = min(ssgsea4)
+        #maximum = max(ssgsea4)
+        #if (abs(min(ssgsea4)) > abs(max(ssgsea4))) {
+        #  ssgsea4[ssgsea4 < -abs(max(ssgsea4))] = -abs(max(ssgsea4))
+        #} else {
+        #  ssgsea4[ssgsea4 > abs(min(ssgsea4))] = abs(min(ssgsea4))
+        #}
+        #bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        ##Heatmap color
+        #col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #if (color_choice == "original") {
+        #  HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice %in% col_sets) {
+        #  HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice == "Inferno") {
+        #  hmcols <- inferno(500)
+        #}
+        #else if (color_choice == "Viridis") {
+        #  hmcols <- viridis(500)
+        #}
+        #else if (color_choice == "Plasma") {
+        #  hmcols <- plasma(500)
+        #}
+        #else if (color_choice == "OmniBlueRed") {
+        #  hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #}
+        #else if (color_choice == "LightBlueBlackRed") {
+        #  hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #}
+        #else if (color_choice == "GreenBlackRed") {
+        #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #}
+#
+        #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+        #meta2[,2] <- as.factor(meta2[,2])
+        #meta2 <- meta2[order(meta2[,2]),]
+        #rownames(meta2) <- meta2[,1]
+        #meta2 <- meta2[,-1,drop = F]
+        #ssgsea4 <- ssgsea4[,rownames(meta2)]
+#
+        ##meta <- meta[order(meta[,2]),]
+        ##type <- meta[,2]
+        ##meta2 <- as.data.frame(type)
+        ##rownames(meta2) <- meta[,1]
+#
+        #hm <- pheatmap::pheatmap(ssgsea4,
+        #                         cluster_col = clust_cols_opt,
+        #                         cluster_row = clust_rows_opt,
+        #                         fontsize_row = row_font,
+        #                         fontsize_col = col_font,
+        #                         show_rownames = row_names_choice,
+        #                         show_colnames = col_names_choice,
+        #                         annotation_col = meta2,
+        #                         clustering_method = clust_method,
+        #                         color = hmcols)
+#
+        #hm
+
+
+      })
+
+      ssgsea_heat2_data <- reactive({
+
         meta <- meta_react()
         metacol <- metacol_reactVal()
         A <- expr_mat_react()
-        #if (ncol(meta) > 2) {
-        #  metacol <- input$GSEAmetaCol
-        #}
-        #else if (ncol(meta) == 2) {
-        #  metacol <- colnames(meta)[2]
-        #}
-        if (is.null(input$ClusterMethodSSheat) == TRUE) {
-          clust_method <- 'complete'
-        }
-        else if (is.null(input$ClusterMethodSSheat) == FALSE) {
-          clust_method <- input$ClusterMethodSSheat
-        }
-        color_choice <- input$ColorPalette_gseaHeat
-        clust_cols_opt <- input$clustcolsSSheat
-        clust_rows_opt <- input$clustrowsSSheat
         scoreMethod <- input$ssGSEAtypeHeat
 
         if (is.null(input$ssgseaHeatGS) == TRUE) {
-          #geneset_names <- gs_names_start
           geneset_names <- ssGSEA_Heat_GS()
         }
         else if (is.null(input$ssgseaHeatGS) == FALSE) {
@@ -3012,68 +3405,167 @@ server <- function(input, output, session) {
         final_gs <- intersect(geneset_names,neworder_gs)
 
         ssgsea5 <- ssgsea5[final_gs,]
-
-        minimum = min(ssgsea5)
-        maximum = max(ssgsea5)
-        if (abs(min(ssgsea5)) > abs(max(ssgsea5))) {
-          ssgsea5[ssgsea5 < -abs(max(ssgsea5))] = -abs(max(ssgsea5))
-        } else {
-          ssgsea5[ssgsea5 > abs(min(ssgsea5))] = abs(min(ssgsea5))
-        }
-        bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-        #Heatmap color
-        col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-        if (color_choice == "original") {
-          HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice %in% col_sets) {
-          HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-          hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-        }
-        else if (color_choice == "Inferno") {
-          hmcols <- inferno(500)
-        }
-        else if (color_choice == "Viridis") {
-          hmcols <- viridis(500)
-        }
-        else if (color_choice == "Plasma") {
-          hmcols <- plasma(500)
-        }
-        else if (color_choice == "OmniBlueRed") {
-          hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-        }
-        else if (color_choice == "LightBlueBlackRed") {
-          hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-        }
-        else if (color_choice == "GreenBlackRed") {
-          hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-        }
-
         meta2 <- meta[,c(colnames(meta)[1],metacol)]
         meta2[,2] <- as.factor(meta2[,2])
         meta2 <- meta2[order(meta2[,2]),]
         rownames(meta2) <- meta2[,1]
         meta2 <- meta2[,-1,drop = F]
         ssgsea5 <- ssgsea5[,rownames(meta2)]
-
+        ssgsea5
         #meta <- meta[order(meta[,2]),]
         #type <- meta[,2]
         #meta2 <- as.data.frame(type)
         #rownames(meta2) <- meta[,1]
 
-        hm <- pheatmap::pheatmap(ssgsea5,
-                                 cluster_col = clust_cols_opt,
-                                 cluster_row = clust_rows_opt,
-                                 fontsize_row = row_font,
-                                 fontsize_col = col_font,
-                                 show_rownames = row_names_choice,
-                                 show_colnames = col_names_choice,
-                                 annotation_col = meta2,
-                                 clustering_method = clust_method,
-                                 color = hmcols)
+      })
 
-        hm
+      ssgseaheatmap2_react <- reactive({
+
+        row_names_choice <- input$ShowRowNames1SSheat
+        col_names_choice <- input$ShowColNamesSSheat
+        row_font <- input$heatmapFont1.r
+        col_font <- input$heatmapFont1.c
+        clust_cols_opt <- input$clustcolsSSheat
+        clust_rows_opt <- input$clustrowsSSheat
+        if (is.null(input$ClusterMethodSSheat) == TRUE) {
+          clust_method <- 'complete'
+        }
+        else if (is.null(input$ClusterMethodSSheat) == FALSE) {
+          clust_method <- input$ClusterMethodSSheat
+        }
+
+        dataset <- ssgsea_heat2_data()
+        colAnno <- ssgsea_heat_anno()
+
+        p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                      top_annotation = colAnno,
+                                                      clustering_method_rows = clust_method,
+                                                      show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                      cluster_rows = clust_rows_opt, cluster_columns = clust_cols_opt,
+                                                      row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                      heatmap_legend_param = list(title = "ssGSEA Score"),
+                                                      border = F))
+        p
+
+
+        #meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        #A <- expr_mat_react()
+        ##if (ncol(meta) > 2) {
+        ##  metacol <- input$GSEAmetaCol
+        ##}
+        ##else if (ncol(meta) == 2) {
+        ##  metacol <- colnames(meta)[2]
+        ##}
+        #if (is.null(input$ClusterMethodSSheat) == TRUE) {
+        #  clust_method <- 'complete'
+        #}
+        #else if (is.null(input$ClusterMethodSSheat) == FALSE) {
+        #  clust_method <- input$ClusterMethodSSheat
+        #}
+        #color_choice <- input$ColorPalette_gseaHeat
+        #clust_cols_opt <- input$clustcolsSSheat
+        #clust_rows_opt <- input$clustrowsSSheat
+        #scoreMethod <- input$ssGSEAtypeHeat
+#
+        #if (is.null(input$ssgseaHeatGS) == TRUE) {
+        #  #geneset_names <- gs_names_start
+        #  geneset_names <- ssGSEA_Heat_GS()
+        #}
+        #else if (is.null(input$ssgseaHeatGS) == FALSE) {
+        #  geneset_names <- input$ssgseaHeatGS
+        #}
+        #samples_chosen <- input$userheatsampSS
+#
+        #A <- A[,samples_chosen]
+        #meta <- meta[which(meta[,1] %in% samples_chosen),]
+#
+        #if (input$tables == 1) {
+        #  GS <- gs[geneset_names]
+        #}
+        #if (input$tables == 3) {
+        #  GS <- gs2[geneset_names]
+        #}
+        #if (input$tables == 5) {
+        #  GS <- RDataListGen()[geneset_names]
+        #}
+        #ssgsea <- gsva(A, GS, method = scoreMethod, verbose = F, ssgsea.norm = F)
+#
+        #SD=apply(ssgsea,1, sd, na.rm = TRUE) #get SD
+#
+        #ssgsea2 = t(ssgsea)
+        #ssgsea3 = apply(ssgsea2, 2, scale);
+        #ssgsea4 = apply(ssgsea3, 1, rev)
+        #colnames(ssgsea4) = rownames(ssgsea2)
+#
+        #ssgsea5 = ssgsea4 * SD #multiply zscore matrix by SD
+#
+        #neworder_gs <- rownames(ssgsea5)
+        #final_gs <- intersect(geneset_names,neworder_gs)
+#
+        #ssgsea5 <- ssgsea5[final_gs,]
+#
+        #minimum = min(ssgsea5)
+        #maximum = max(ssgsea5)
+        #if (abs(min(ssgsea5)) > abs(max(ssgsea5))) {
+        #  ssgsea5[ssgsea5 < -abs(max(ssgsea5))] = -abs(max(ssgsea5))
+        #} else {
+        #  ssgsea5[ssgsea5 > abs(min(ssgsea5))] = abs(min(ssgsea5))
+        #}
+        #bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        ##Heatmap color
+        #col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #if (color_choice == "original") {
+        #  HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice %in% col_sets) {
+        #  HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #  hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #}
+        #else if (color_choice == "Inferno") {
+        #  hmcols <- inferno(500)
+        #}
+        #else if (color_choice == "Viridis") {
+        #  hmcols <- viridis(500)
+        #}
+        #else if (color_choice == "Plasma") {
+        #  hmcols <- plasma(500)
+        #}
+        #else if (color_choice == "OmniBlueRed") {
+        #  hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #}
+        #else if (color_choice == "LightBlueBlackRed") {
+        #  hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #}
+        #else if (color_choice == "GreenBlackRed") {
+        #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #}
+#
+        #meta2 <- meta[,c(colnames(meta)[1],metacol)]
+        #meta2[,2] <- as.factor(meta2[,2])
+        #meta2 <- meta2[order(meta2[,2]),]
+        #rownames(meta2) <- meta2[,1]
+        #meta2 <- meta2[,-1,drop = F]
+        #ssgsea5 <- ssgsea5[,rownames(meta2)]
+#
+        ##meta <- meta[order(meta[,2]),]
+        ##type <- meta[,2]
+        ##meta2 <- as.data.frame(type)
+        ##rownames(meta2) <- meta[,1]
+#
+        #hm <- pheatmap::pheatmap(ssgsea5,
+        #                         cluster_col = clust_cols_opt,
+        #                         cluster_row = clust_rows_opt,
+        #                         fontsize_row = row_font,
+        #                         fontsize_col = col_font,
+        #                         show_rownames = row_names_choice,
+        #                         show_colnames = col_names_choice,
+        #                         annotation_col = meta2,
+        #                         clustering_method = clust_method,
+        #                         color = hmcols)
+#
+        #hm
 
 
       })
@@ -3889,275 +4381,360 @@ server <- function(input, output, session) {
         }
       })
 
-      #render heatmap
-      output$heatmap0 <- renderPlot({
+      GeneSetName_React <- reactive({
+
+        if (input$tables == 1) {
+          if (length(input$msigdbTable_rows_selected) > 0) {
+            GS <- as.character(msigdb.gsea2[input$msigdbTable_rows_selected,3])
+            GS
+          }
+        } else if (input$tables == 3) {
+          if (length(input$tab2table_rows_selected) > 0) {
+            GS <- as.character(GeneSet2[input$tab2table_rows_selected,1])
+            GS
+          }
+        } else if (input$tables == 5) {
+          if (length(input$GStable.u_rows_selected) > 0) {
+            GS <- as.character(user_gs_mirror()[input$GStable.u_rows_selected,1])
+            GS
+          }
+        }
+
+      })
+
+      gsea_heat_anno <- reactive({
+
+        if (isTruthy(input$GSEAGroupColMulti)) {
+          meta <- meta_react()
+          dataset <- gsea_heat_data()
+          meta <- meta[which(meta[,1] %in% colnames(dataset)),]
+          rownames(meta) <- meta[,1]
+          meta_sub <- meta[,input$GSEAGroupColMulti, drop = F]
+          meta_sub[,input$GSEAGroupColMulti] <- as.data.frame(lapply(meta_sub[,input$GSEAGroupColMulti, drop = F], factor))
+          colAnn <- ComplexHeatmap::HeatmapAnnotation(df = meta_sub,
+                                                      name = input$GSEAGroupColMulti,
+                                                      which = 'col'
+          )
+          colAnn
+        } else {
+          colAnn <- NULL
+          colAnn
+        }
+
+      })
+
+      gsea_heat_data <- reactive({
 
         meta <- meta_react()
         metacol <- metacol_reactVal()
         A <- expr_mat_react()
-        if (input$tables == 1) {
-          if (length(input$msigdbTable_rows_selected) > 0){
-            #if (ncol(meta) > 2) {
-            #  req(input$GSEAmetaCol)
-            #  metacol <- input$GSEAmetaCol
-            #}
-            #else if (ncol(meta) == 2) {
-            #  metacol <- colnames(meta)[2]
-            #}
-            groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
-            groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
-            res <- datasetInput()
-            gsea.df <- as.data.frame(res@result)
-            GS <- as.character(msigdb.gsea2[input$msigdbTable_rows_selected,3])
-            genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
-            genes2 <- strsplit(genes1,"/")
-            genes3 <- as.data.frame(genes2, col.names = "genes")
-            gene_symbol <- genes3$genes
-            ## convert expression matrix to numeric
-            class(A) <- "numeric"
-            ## Transforming data
-            A <- A[,c(groupA,groupB)]
-            exp.mat1 = log2(A + 1) # log
-            exp.mat2 = apply(exp.mat1, 1, scale); # z score
-            exp.mat3 = apply(exp.mat2, 1, rev); # transpose
-            colnames(exp.mat3) = colnames(A) # set the column name
-            exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
-            exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
-            # reassign data
-            dataset <- exp.mat5
-            ## generate color for pheatmap
-            if (abs(min(dataset)) > abs(max(dataset))) {
-              dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-            } else {
-              dataset[dataset > abs(min(dataset))] = abs(min(dataset))
-            }
-            meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
+        GS <- GeneSetName_React()
+        groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
+        groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
+        res <- datasetInput()
+        gsea.df <- as.data.frame(res@result)
+        genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
+        genes2 <- strsplit(genes1,"/")
+        genes3 <- as.data.frame(genes2, col.names = "genes")
+        gene_symbol <- genes3$genes
+        ## convert expression matrix to numeric
+        class(A) <- "numeric"
+        ## Transforming data
+        A <- A[,c(groupA,groupB)]
+        exp.mat1 = log2(A + 1) # log
+        exp.mat2 = apply(exp.mat1, 1, scale); # z score
+        exp.mat3 = apply(exp.mat2, 1, rev); # transpose
+        colnames(exp.mat3) = colnames(A) # set the column name
+        exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
+        exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
+        # reassign data
+        dataset <- exp.mat5
+        dataset
 
-            meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
-            meta2[,2] <- as.factor(meta2[,2])
-            meta2 <- meta2[order(meta2[,2]),]
-            rownames(meta2) <- meta2[,1]
-            meta3 <- meta2[,-1,drop = F]
-            dataset <- dataset[,rownames(meta2)]
+      })
+      #render heatmap
+      output$heatmap0 <- renderPlot({
 
-            zscore_range = 10;
-            minimum = -zscore_range;
-            maximum = zscore_range;
-            bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-            #Heatmap color
-            color_choice <- input$ColorPalette_gseaHeat
-            col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-            if (color_choice == "original") {
-              HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice %in% col_sets) {
-              HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice == "Inferno") {
-              hmcols <- inferno(500)
-            }
-            else if (color_choice == "Viridis") {
-              hmcols <- viridis(500)
-            }
-            else if (color_choice == "Plasma") {
-              hmcols <- plasma(500)
-            }
-            else if (color_choice == "OmniBlueRed") {
-              hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-            }
-            else if (color_choice == "LightBlueBlackRed") {
-              hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-            }
-            else if (color_choice == "GreenBlackRed") {
-              hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-            }
-            pheatmap::pheatmap(dataset,            #data
-                               cluster_cols = F,    #cluster columns - NO
-                               cluster_row = F,     #cluster rows - YES
-                               fontsize_col = input$heatmapFont1.c,   #column fontsize
-                               fontsize_row = input$heatmapFont1.r,
-                               show_rownames = T,
-                               show_colnames = T,
-                               color=hmcols,
-                               annotation_col = meta3)
-          }
-        }
-        else if (input$tables == 3) {
-          if (length(input$tab2table_rows_selected) > 0){
-            #if (ncol(meta) > 2) {
-            #  req(input$GSEAmetaCol)
-            #  metacol <- input$GSEAmetaCol
-            #}
-            #else if (ncol(meta) == 2) {
-            #  metacol <- colnames(meta)[2]
-            #}
-            groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
-            groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
-            res <- datasetInput()
-            gsea.df <- as.data.frame(res@result)
-            GS <- as.character(GeneSet2[input$tab2table_rows_selected,1])
-            genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
-            genes2 <- strsplit(genes1,"/")
-            genes3 <- as.data.frame(genes2, col.names = "genes")
-            gene_symbol <- genes3$genes
-            ## convert expression matrix to numeric
-            class(A) <- "numeric"
-            ## Transforming data
-            A <- A[,c(groupA,groupB)]
-            exp.mat1 = log2(A + 1) # log
-            exp.mat2 = apply(exp.mat1, 1, scale); # z score
-            exp.mat3 = apply(exp.mat2, 1, rev); # transpose
-            colnames(exp.mat3) = colnames(A) # set the column name
-            exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
-            exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
-            # reassign data
-            dataset <- exp.mat5
-            ## generate color for pheatmap
-            if (abs(min(dataset)) > abs(max(dataset))) {
-              dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-            } else {
-              dataset[dataset > abs(min(dataset))] = abs(min(dataset))
-            }
-            meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
-            meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
-            meta2[,2] <- as.factor(meta2[,2])
-            meta2 <- meta2[order(meta2[,2]),]
-            rownames(meta2) <- meta2[,1]
-            meta3 <- meta2[,-1,drop = F]
-            dataset <- dataset[,rownames(meta2)]
-            zscore_range = 10;
-            minimum = -zscore_range;
-            maximum = zscore_range;
-            bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-            #Heatmap color
-            color_choice <- input$ColorPalette_gseaHeat
-            col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-            if (color_choice == "original") {
-              HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice %in% col_sets) {
-              HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice == "Inferno") {
-              hmcols <- inferno(500)
-            }
-            else if (color_choice == "Viridis") {
-              hmcols <- viridis(500)
-            }
-            else if (color_choice == "Plasma") {
-              hmcols <- plasma(500)
-            }
-            else if (color_choice == "OmniBlueRed") {
-              hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-            }
-            else if (color_choice == "LightBlueBlackRed") {
-              hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-            }
-            else if (color_choice == "GreenBlackRed") {
-              hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-            }
-            pheatmap::pheatmap(dataset,            #data
-                               cluster_cols = F,    #cluster columns - NO
-                               cluster_row = F,     #cluster rows - YES
-                               fontsize_col = input$heatmapFont1.c,   #column fontsize
-                               fontsize_row = input$heatmapFont1.r,
-                               show_rownames = T,
-                               show_colnames = T,
-                               color=hmcols,
-                               annotation_col = meta3)
-          }
-        }
-        else if (input$tables == 5) {
-          if (length(input$GStable.u_rows_selected) > 0){
-            #if (ncol(meta) > 2) {
-            #  req(input$GSEAmetaCol)
-            #  metacol <- input$GSEAmetaCol
-            #}
-            #else if (ncol(meta) == 2) {
-            #  metacol <- colnames(meta)[2]
-            #}
-            groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
-            groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
-            res <- datasetInput()
-            gsea.df <- as.data.frame(res@result)
-            GS <- as.character(user_gs_mirror()[input$GStable.u_rows_selected,1])
-            genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
-            genes2 <- strsplit(genes1,"/")
-            genes3 <- as.data.frame(genes2, col.names = "genes")
-            gene_symbol <- genes3$genes
-            ## convert expression matrix to numeric
-            class(A) <- "numeric"
-            ## Transforming data
-            A <- A[,c(groupA,groupB)]
-            exp.mat1 = log2(A + 1) # log
-            exp.mat2 = apply(exp.mat1, 1, scale); # z score
-            exp.mat3 = apply(exp.mat2, 1, rev); # transpose
-            colnames(exp.mat3) = colnames(A) # set the column name
-            exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
-            exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
-            # reassign data
-            dataset <- exp.mat5
-            ## generate color for pheatmap
-            if (abs(min(dataset)) > abs(max(dataset))) {
-              dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
-            } else {
-              dataset[dataset > abs(min(dataset))] = abs(min(dataset))
-            }
-            meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
-            meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
-            meta2[,2] <- as.factor(meta2[,2])
-            meta2 <- meta2[order(meta2[,2]),]
-            rownames(meta2) <- meta2[,1]
-            meta3 <- meta2[,-1,drop = F]
-            dataset <- dataset[,rownames(meta2)]
-            zscore_range = 10;
-            minimum = -zscore_range;
-            maximum = zscore_range;
-            bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
-            #Heatmap color
-            color_choice <- input$ColorPalette_gseaHeat
-            col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
-            if (color_choice == "original") {
-              HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice %in% col_sets) {
-              HeatMap_Colors <- brewer.pal(n = 5, color_choice)
-              hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
-            }
-            else if (color_choice == "Inferno") {
-              hmcols <- inferno(500)
-            }
-            else if (color_choice == "Viridis") {
-              hmcols <- viridis(500)
-            }
-            else if (color_choice == "Plasma") {
-              hmcols <- plasma(500)
-            }
-            else if (color_choice == "OmniBlueRed") {
-              hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
-            }
-            else if (color_choice == "LightBlueBlackRed") {
-              hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
-            }
-            else if (color_choice == "GreenBlackRed") {
-              hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
-            }
-            pheatmap::pheatmap(dataset,            #data
-                               cluster_cols = F,    #cluster columns - NO
-                               cluster_row = F,     #cluster rows - YES
-                               fontsize_col = input$heatmapFont1.c,   #column fontsize
-                               fontsize_row = input$heatmapFont1.r,
-                               show_rownames = T,
-                               show_colnames = T,
-                               color=hmcols,
-                               annotation_col = meta3)
-          }
-        }
+        #meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        #A <- expr_mat_react()
+        colAnno <- gsea_heat_anno()
+        dataset <- gsea_heat_data()
+
+        p <- suppressMessages(ComplexHeatmap::Heatmap(dataset,
+                                                      top_annotation = colAnno,
+                                                      #clustering_method_rows = clust_method,
+                                                      #show_row_names = row_names_choice, show_column_names = col_names_choice,
+                                                      cluster_rows = F, cluster_columns = F,
+                                                      #row_names_gp = gpar(fontsize = row_font), column_names_gp = gpar(fontsize = col_font),
+                                                      heatmap_legend_param = list(title = "Expression"),
+                                                      border = F))
+        p
+
+
+        #if (input$tables == 1) {
+        #  if (length(input$msigdbTable_rows_selected) > 0){
+        #    #if (ncol(meta) > 2) {
+        #    #  req(input$GSEAmetaCol)
+        #    #  metacol <- input$GSEAmetaCol
+        #    #}
+        #    #else if (ncol(meta) == 2) {
+        #    #  metacol <- colnames(meta)[2]
+        #    #}
+        #    groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
+        #    groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
+        #    res <- datasetInput()
+        #    gsea.df <- as.data.frame(res@result)
+        #    GS <- as.character(msigdb.gsea2[input$msigdbTable_rows_selected,3])
+        #    genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
+        #    genes2 <- strsplit(genes1,"/")
+        #    genes3 <- as.data.frame(genes2, col.names = "genes")
+        #    gene_symbol <- genes3$genes
+        #    ## convert expression matrix to numeric
+        #    class(A) <- "numeric"
+        #    ## Transforming data
+        #    A <- A[,c(groupA,groupB)]
+        #    exp.mat1 = log2(A + 1) # log
+        #    exp.mat2 = apply(exp.mat1, 1, scale); # z score
+        #    exp.mat3 = apply(exp.mat2, 1, rev); # transpose
+        #    colnames(exp.mat3) = colnames(A) # set the column name
+        #    exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
+        #    exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
+        #    # reassign data
+        #    dataset <- exp.mat5
+        #    ## generate color for pheatmap
+        #    if (abs(min(dataset)) > abs(max(dataset))) {
+        #      dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+        #    } else {
+        #      dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        #    }
+        #    meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
+#
+        #    meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
+        #    meta2[,2] <- as.factor(meta2[,2])
+        #    meta2 <- meta2[order(meta2[,2]),]
+        #    rownames(meta2) <- meta2[,1]
+        #    meta3 <- meta2[,-1,drop = F]
+        #    dataset <- dataset[,rownames(meta2)]
+#
+        #    zscore_range = 10;
+        #    minimum = -zscore_range;
+        #    maximum = zscore_range;
+        #    bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        #    #Heatmap color
+        #    color_choice <- input$ColorPalette_gseaHeat
+        #    col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #    if (color_choice == "original") {
+        #      HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice %in% col_sets) {
+        #      HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice == "Inferno") {
+        #      hmcols <- inferno(500)
+        #    }
+        #    else if (color_choice == "Viridis") {
+        #      hmcols <- viridis(500)
+        #    }
+        #    else if (color_choice == "Plasma") {
+        #      hmcols <- plasma(500)
+        #    }
+        #    else if (color_choice == "OmniBlueRed") {
+        #      hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "LightBlueBlackRed") {
+        #      hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "GreenBlackRed") {
+        #      hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #    }
+        #    pheatmap::pheatmap(dataset,            #data
+        #                       cluster_cols = F,    #cluster columns - NO
+        #                       cluster_row = F,     #cluster rows - YES
+        #                       fontsize_col = input$heatmapFont1.c,   #column fontsize
+        #                       fontsize_row = input$heatmapFont1.r,
+        #                       show_rownames = T,
+        #                       show_colnames = T,
+        #                       color=hmcols,
+        #                       annotation_col = meta3)
+        #  }
+        #}
+        #else if (input$tables == 3) {
+        #  if (length(input$tab2table_rows_selected) > 0){
+        #    #if (ncol(meta) > 2) {
+        #    #  req(input$GSEAmetaCol)
+        #    #  metacol <- input$GSEAmetaCol
+        #    #}
+        #    #else if (ncol(meta) == 2) {
+        #    #  metacol <- colnames(meta)[2]
+        #    #}
+        #    groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
+        #    groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
+        #    res <- datasetInput()
+        #    gsea.df <- as.data.frame(res@result)
+        #    GS <- as.character(GeneSet2[input$tab2table_rows_selected,1])
+        #    genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
+        #    genes2 <- strsplit(genes1,"/")
+        #    genes3 <- as.data.frame(genes2, col.names = "genes")
+        #    gene_symbol <- genes3$genes
+        #    ## convert expression matrix to numeric
+        #    class(A) <- "numeric"
+        #    ## Transforming data
+        #    A <- A[,c(groupA,groupB)]
+        #    exp.mat1 = log2(A + 1) # log
+        #    exp.mat2 = apply(exp.mat1, 1, scale); # z score
+        #    exp.mat3 = apply(exp.mat2, 1, rev); # transpose
+        #    colnames(exp.mat3) = colnames(A) # set the column name
+        #    exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
+        #    exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
+        #    # reassign data
+        #    dataset <- exp.mat5
+        #    ## generate color for pheatmap
+        #    if (abs(min(dataset)) > abs(max(dataset))) {
+        #      dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+        #    } else {
+        #      dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        #    }
+        #    meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
+        #    meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
+        #    meta2[,2] <- as.factor(meta2[,2])
+        #    meta2 <- meta2[order(meta2[,2]),]
+        #    rownames(meta2) <- meta2[,1]
+        #    meta3 <- meta2[,-1,drop = F]
+        #    dataset <- dataset[,rownames(meta2)]
+        #    zscore_range = 10;
+        #    minimum = -zscore_range;
+        #    maximum = zscore_range;
+        #    bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        #    #Heatmap color
+        #    color_choice <- input$ColorPalette_gseaHeat
+        #    col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #    if (color_choice == "original") {
+        #      HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice %in% col_sets) {
+        #      HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice == "Inferno") {
+        #      hmcols <- inferno(500)
+        #    }
+        #    else if (color_choice == "Viridis") {
+        #      hmcols <- viridis(500)
+        #    }
+        #    else if (color_choice == "Plasma") {
+        #      hmcols <- plasma(500)
+        #    }
+        #    else if (color_choice == "OmniBlueRed") {
+        #      hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "LightBlueBlackRed") {
+        #      hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "GreenBlackRed") {
+        #      hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #    }
+        #    pheatmap::pheatmap(dataset,            #data
+        #                       cluster_cols = F,    #cluster columns - NO
+        #                       cluster_row = F,     #cluster rows - YES
+        #                       fontsize_col = input$heatmapFont1.c,   #column fontsize
+        #                       fontsize_row = input$heatmapFont1.r,
+        #                       show_rownames = T,
+        #                       show_colnames = T,
+        #                       color=hmcols,
+        #                       annotation_col = meta3)
+        #  }
+        #}
+        #else if (input$tables == 5) {
+        #  if (length(input$GStable.u_rows_selected) > 0){
+        #    #if (ncol(meta) > 2) {
+        #    #  req(input$GSEAmetaCol)
+        #    #  metacol <- input$GSEAmetaCol
+        #    #}
+        #    #else if (ncol(meta) == 2) {
+        #    #  metacol <- colnames(meta)[2]
+        #    #}
+        #    groupA <- meta[which(meta[,metacol] == input$comparisonA),1]
+        #    groupB <- meta[which(meta[,metacol] == input$comparisonB),1]
+        #    res <- datasetInput()
+        #    gsea.df <- as.data.frame(res@result)
+        #    GS <- as.character(user_gs_mirror()[input$GStable.u_rows_selected,1])
+        #    genes1 <- as.matrix(gsea.df[which(gsea.df$Description==GS),"core_enrichment"])
+        #    genes2 <- strsplit(genes1,"/")
+        #    genes3 <- as.data.frame(genes2, col.names = "genes")
+        #    gene_symbol <- genes3$genes
+        #    ## convert expression matrix to numeric
+        #    class(A) <- "numeric"
+        #    ## Transforming data
+        #    A <- A[,c(groupA,groupB)]
+        #    exp.mat1 = log2(A + 1) # log
+        #    exp.mat2 = apply(exp.mat1, 1, scale); # z score
+        #    exp.mat3 = apply(exp.mat2, 1, rev); # transpose
+        #    colnames(exp.mat3) = colnames(A) # set the column name
+        #    exp.mat4 = exp.mat3[rowSums(is.na(exp.mat3[,])) == 0,] # remove NaN rows
+        #    exp.mat5 = exp.mat4[rownames(exp.mat4) %in% gene_symbol,] # grab gene symbols
+        #    # reassign data
+        #    dataset <- exp.mat5
+        #    ## generate color for pheatmap
+        #    if (abs(min(dataset)) > abs(max(dataset))) {
+        #      dataset[dataset < -abs(max(dataset))] = -abs(max(dataset))
+        #    } else {
+        #      dataset[dataset > abs(min(dataset))] = abs(min(dataset))
+        #    }
+        #    meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
+        #    meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
+        #    meta2[,2] <- as.factor(meta2[,2])
+        #    meta2 <- meta2[order(meta2[,2]),]
+        #    rownames(meta2) <- meta2[,1]
+        #    meta3 <- meta2[,-1,drop = F]
+        #    dataset <- dataset[,rownames(meta2)]
+        #    zscore_range = 10;
+        #    minimum = -zscore_range;
+        #    maximum = zscore_range;
+        #    bk = c(seq(minimum,minimum/2, length=100), seq(minimum/2,maximum/2,length=100),seq(maximum/2,maximum,length=100))
+        #    #Heatmap color
+        #    color_choice <- input$ColorPalette_gseaHeat
+        #    col_sets <- c("OrRd","PuBu","Greens","YlGnBu")
+        #    if (color_choice == "original") {
+        #      HeatMap_Colors <- c("dark blue","blue","white","red", "dark red")
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice %in% col_sets) {
+        #      HeatMap_Colors <- brewer.pal(n = 5, color_choice)
+        #      hmcols <- colorRampPalette(HeatMap_Colors)(length(bk)-1)
+        #    }
+        #    else if (color_choice == "Inferno") {
+        #      hmcols <- inferno(500)
+        #    }
+        #    else if (color_choice == "Viridis") {
+        #      hmcols <- viridis(500)
+        #    }
+        #    else if (color_choice == "Plasma") {
+        #      hmcols <- plasma(500)
+        #    }
+        #    else if (color_choice == "OmniBlueRed") {
+        #      hmcols<- colorRampPalette(c("#1984C5", "#22A7F0", "#63BFF0", "#A7D5ED", "#E2E2E2", "#E1A692", "#DE6E56", "#E14B31", "#C23728"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "LightBlueBlackRed") {
+        #      hmcols<- colorRampPalette(c("#34C5FD","black","red"))(length(bk)-1)
+        #    }
+        #    else if (color_choice == "GreenBlackRed") {
+        #      hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
+        #    }
+        #    pheatmap::pheatmap(dataset,            #data
+        #                       cluster_cols = F,    #cluster columns - NO
+        #                       cluster_row = F,     #cluster rows - YES
+        #                       fontsize_col = input$heatmapFont1.c,   #column fontsize
+        #                       fontsize_row = input$heatmapFont1.r,
+        #                       show_rownames = T,
+        #                       show_colnames = T,
+        #                       color=hmcols,
+        #                       annotation_col = meta3)
+        #  }
+        #}
       })
 
       #render MVG heatmap - per sample - 1
