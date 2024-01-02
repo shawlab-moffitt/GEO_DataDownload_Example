@@ -107,6 +107,7 @@ if (human == FALSE) {
 }
 
 
+
 # Functions --------------------------------------------------------------------
 
 ## Function to identify numeric or character columns
@@ -330,15 +331,15 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                        uiOutput("rendSubsetCrit"),
                                        conditionalPanel(condition = "input.dataset != '1'",
                                                         uiOutput("rendGroupCol")
-                                                        ),
+                                       ),
                                        conditionalPanel(condition = "input.dataset == '1'",
                                                         conditionalPanel(condition = "input.datasetheat != '5'",
                                                                          uiOutput("rendGroupColMulti")
-                                                                         ),
+                                                        ),
                                                         conditionalPanel(condition = "input.datasetheat == '5'",
                                                                          uiOutput("rendGroupColAvgHeat")
-                                                                         ),
                                                         ),
+                                       ),
                                        ### Sidebar --------------------------------------------
                                        #### Heatmaps
 
@@ -373,14 +374,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          downloadButton("MVGdownloadgmt", "Download MVG .gmt"),
                                                                          hr(),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette1", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette1", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowColNames1","Show Heatmap Column Names", value = T),
@@ -393,6 +394,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                   numericInput("heatmapFont2.r", "Heatmap Row Font Size:",
                                                                                                min = 5, max = 75,
                                                                                                value = 9, step = 1)
+                                                                           )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight1","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth1","Download Width (in)",value = 10)
                                                                            )
                                                                          )
                                                         )
@@ -430,14 +439,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          ),
                                                                          uiOutput("rendClustMethodsCust"),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette2", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette2", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowRowNames2","Show Heatmap Row Names", value = T),
@@ -451,6 +460,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                                min = 5, max = 75,
                                                                                                value = 12, step = 1)
                                                                            )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight2","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth2","Download Width (in)",value = 10)
+                                                                           )
                                                                          )
                                                         )
                                        ),
@@ -461,6 +478,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                         conditionalPanel(condition = "input.datasetheat == '3'",
                                                                          h4("Selection Parameters"),
                                                                          #uiOutput("rendMetaColDEGHeat"),
+                                                                         uiOutput("rendDEGcolHeat"),
                                                                          uiOutput("rendcomparisonA2_h"),
                                                                          uiOutput("rendcomparisonB2_h"),
                                                                          #selectInput("MetaColDEGHeat","Meta Column:",
@@ -490,14 +508,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          uiOutput("rendClustMethodsDEG"),
                                                                          hr(),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette3", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette3", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowRowNames3","Show Heatmap Row Names", value = T),
@@ -510,6 +528,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                   numericInput("heatmapFont3.c.deg", "Heatmap Column Font Size:",
                                                                                                min = 5, max = 75,
                                                                                                value = 12, step = 1)
+                                                                           )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight3","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth3","Download Width (in)",value = 10)
                                                                            )
                                                                          )
                                                         )
@@ -694,7 +720,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat1","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat1","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat1","Download as PDF")
                                                              ),
                                                              value = 1),
                                                     ##### Custom Heatmaps
@@ -703,7 +729,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat2","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat2","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat2","Download as PDF")
                                                              ),
                                                              value = 2),
                                                     ##### DEG Heatmaps
@@ -712,7 +738,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat3","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat3","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat3","Download as PDF")
                                                              ),
                                                              value = 3),
                                                     ##### Average Expr Heatmaps
@@ -1000,18 +1026,18 @@ GSEA_tab <- tabPanel("GSEA Analysis",
                            uiOutput("rendGSEASubsetCrit"),
                            conditionalPanel(condition = "input.datasetthree != '6'",
                                             uiOutput("rendGSEAGroupCol")
-                                            ),
+                           ),
                            conditionalPanel(condition = "input.datasetthree == '2'",
                                             uiOutput("rendGSEAGroupColMulti")
-                                            ),
+                           ),
                            conditionalPanel(condition = "input.datasetthree == '6'",
                                             conditionalPanel(condition = "input.datasetssheat == '2' | input.datasetssheat == '1'",
                                                              uiOutput("rendssGSEAGroupColMulti")
-                                                             ),
+                                            ),
                                             conditionalPanel(condition = "input.datasetssheat == '3'",
                                                              uiOutput("rendssGSEAGroupColAvg")
-                                                             )
-                                            ),
+                                            )
+                           ),
                            #uiOutput("rendGSEAGroupCol"),
 
                            ### Sidebar -----------------------------------------
@@ -1747,10 +1773,19 @@ server <- function(input, output, session) {
 
       })
 
-      output$rendcomparisonA2_h <- renderUI({
+      output$rendDEGcolHeat <- renderUI({
 
         meta <- meta_react()
         metacol <- metacol_reactVal()
+        selectInput("DEGcolHeat", "Comparison: GroupA",
+                    choices = colnames(meta)[-1], selected = metacol[1])
+      })
+
+      output$rendcomparisonA2_h <- renderUI({
+
+        meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         metagroups <- unique(meta[,metacol])
         selectInput("comparisonA2_h", "Comparison: GroupA",
                     choices = metagroups, selected = metagroups[1])
@@ -1817,7 +1852,8 @@ server <- function(input, output, session) {
       output$rendcomparisonB2_h <- renderUI({
 
         meta <- meta_react()
-        metacol <- metacol_reactVal()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         metagroups <- unique(meta[,metacol])
         selectInput("comparisonB2_h", "Comparison: GroupB",
                     choices = metagroups, selected = metagroups[2])
@@ -2475,7 +2511,8 @@ server <- function(input, output, session) {
         B_choice <- input$comparisonB2_h            #Comparison group B
 
         meta <- meta_react()
-        metacol <- metacol_reactVal()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         expr <- expr_react()
         # Make Top table - Compares only 2 groups
         #make group based on user input
@@ -2643,7 +2680,7 @@ server <- function(input, output, session) {
         #  dataset <- exp[names(cv),]
         #  variable_gene_list <- names(cv)
         #}
-#
+        #
         #dataset <- log2(dataset + 1)
         #zdataset <- apply(dataset, 1, scale)
         #zdataset <- apply(zdataset, 1, rev)
@@ -2707,7 +2744,7 @@ server <- function(input, output, session) {
         #                         clustering_method = clust_method,
         #                         color = hmcols,
         #                         border_color = NA)
-#
+        #
         #hm
 
       })
@@ -2800,8 +2837,8 @@ server <- function(input, output, session) {
           #colnames(zdataset) <- names(dataset)
           #dataset <- as.matrix(zdataset)
           #dataset[is.na(dataset)] <- 0
-#
-#
+          #
+          #
           #dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
           #minimum = -5;
           #maximum = 5;
@@ -2847,7 +2884,7 @@ server <- function(input, output, session) {
           #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
           #}
           #dataset <- dataset[match(heatgenes, rownames(dataset)),]
-#
+          #
           #hm <- pheatmap::pheatmap(dataset,
           #                         cluster_col = clust_col_choice,
           #                         cluster_row = input$ClusRowOptCust,
@@ -2930,21 +2967,21 @@ server <- function(input, output, session) {
                                                       border = F))
         draw(p, padding = unit(c(50, 50, 2, 2), "mm")) # unit(c(bottom,left,right,top))
         #p
-#
+        #
         #top1 <- topgenereact2()
-#
+        #
         ##if (ncol(meta) > 2) {
         ##  metacol <- input$MetaColDEGHeat
         ##}
         ##else if (ncol(meta) == 2) {
         ##  metacol <- colnames(meta)[2]
         ##}
-#
+        #
         #top_above_cutoff <- top1[which(top1$logFC > abs(FC_cutoff) & top1$P.Value < P_cutoff),]
-#
+        #
         ## Get gene list from Top table
         #genelist <- rownames(top_above_cutoff)[c(1:top_probes)]
-#
+        #
         ## Heatmap Calculations
         #dataset <- expr[which(rownames(expr) %in% genelist),]
         #dataset <- log2(dataset + 1)
@@ -2953,7 +2990,7 @@ server <- function(input, output, session) {
         #colnames(zdataset) <- names(dataset)
         #dataset <- as.matrix(zdataset)
         #dataset[is.na(dataset)] <- 0
-#
+        #
         #dataset = dataset[apply(dataset, 1, function(x) !all(x==0)),]
         #minimum = -5;
         #maximum = 5;
@@ -3272,7 +3309,7 @@ server <- function(input, output, session) {
         #clust_cols_opt <- input$clustcolsSSheat
         #clust_rows_opt <- input$clustrowsSSheat
         #scoreMethod <- input$ssGSEAtypeHeat
-#
+        #
         #if (is.null(input$ssgseaHeatGS) == TRUE) {
         #  #geneset_names <- gs_names_start
         #  geneset_names <- ssGSEA_Heat_GS()
@@ -3281,10 +3318,10 @@ server <- function(input, output, session) {
         #  geneset_names <- input$ssgseaHeatGS
         #}
         #samples_chosen <- input$userheatsampSS
-#
+        #
         #A <- A[,samples_chosen]
         #meta <- meta[which(meta[,1] %in% samples_chosen),]
-#
+        #
         #if (input$tables == 1) {
         #  GS <- gs[geneset_names]
         #}
@@ -3299,12 +3336,12 @@ server <- function(input, output, session) {
         #ssgsea3 = apply(ssgsea2, 2, scale);
         #ssgsea4 = apply(ssgsea3, 1, rev)
         #colnames(ssgsea4) = rownames(ssgsea2)
-#
+        #
         #neworder_gs <- rownames(ssgsea4)
         #final_gs <- intersect(geneset_names,neworder_gs)
-#
+        #
         #ssgsea4 <- ssgsea4[final_gs,]
-#
+        #
         #minimum = min(ssgsea4)
         #maximum = max(ssgsea4)
         #if (abs(min(ssgsea4)) > abs(max(ssgsea4))) {
@@ -3341,19 +3378,19 @@ server <- function(input, output, session) {
         #else if (color_choice == "GreenBlackRed") {
         #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
         #}
-#
+        #
         #meta2 <- meta[,c(colnames(meta)[1],metacol)]
         #meta2[,2] <- as.factor(meta2[,2])
         #meta2 <- meta2[order(meta2[,2]),]
         #rownames(meta2) <- meta2[,1]
         #meta2 <- meta2[,-1,drop = F]
         #ssgsea4 <- ssgsea4[,rownames(meta2)]
-#
+        #
         ##meta <- meta[order(meta[,2]),]
         ##type <- meta[,2]
         ##meta2 <- as.data.frame(type)
         ##rownames(meta2) <- meta[,1]
-#
+        #
         #hm <- pheatmap::pheatmap(ssgsea4,
         #                         cluster_col = clust_cols_opt,
         #                         cluster_row = clust_rows_opt,
@@ -3364,7 +3401,7 @@ server <- function(input, output, session) {
         #                         annotation_col = meta2,
         #                         clustering_method = clust_method,
         #                         color = hmcols)
-#
+        #
         #hm
 
 
@@ -3474,7 +3511,7 @@ server <- function(input, output, session) {
         #clust_cols_opt <- input$clustcolsSSheat
         #clust_rows_opt <- input$clustrowsSSheat
         #scoreMethod <- input$ssGSEAtypeHeat
-#
+        #
         #if (is.null(input$ssgseaHeatGS) == TRUE) {
         #  #geneset_names <- gs_names_start
         #  geneset_names <- ssGSEA_Heat_GS()
@@ -3483,10 +3520,10 @@ server <- function(input, output, session) {
         #  geneset_names <- input$ssgseaHeatGS
         #}
         #samples_chosen <- input$userheatsampSS
-#
+        #
         #A <- A[,samples_chosen]
         #meta <- meta[which(meta[,1] %in% samples_chosen),]
-#
+        #
         #if (input$tables == 1) {
         #  GS <- gs[geneset_names]
         #}
@@ -3497,21 +3534,21 @@ server <- function(input, output, session) {
         #  GS <- RDataListGen()[geneset_names]
         #}
         #ssgsea <- gsva(A, GS, method = scoreMethod, verbose = F, ssgsea.norm = F)
-#
+        #
         #SD=apply(ssgsea,1, sd, na.rm = TRUE) #get SD
-#
+        #
         #ssgsea2 = t(ssgsea)
         #ssgsea3 = apply(ssgsea2, 2, scale);
         #ssgsea4 = apply(ssgsea3, 1, rev)
         #colnames(ssgsea4) = rownames(ssgsea2)
-#
+        #
         #ssgsea5 = ssgsea4 * SD #multiply zscore matrix by SD
-#
+        #
         #neworder_gs <- rownames(ssgsea5)
         #final_gs <- intersect(geneset_names,neworder_gs)
-#
+        #
         #ssgsea5 <- ssgsea5[final_gs,]
-#
+        #
         #minimum = min(ssgsea5)
         #maximum = max(ssgsea5)
         #if (abs(min(ssgsea5)) > abs(max(ssgsea5))) {
@@ -3548,19 +3585,19 @@ server <- function(input, output, session) {
         #else if (color_choice == "GreenBlackRed") {
         #  hmcols<- colorRampPalette(c("green","black","red"))(length(bk)-1)
         #}
-#
+        #
         #meta2 <- meta[,c(colnames(meta)[1],metacol)]
         #meta2[,2] <- as.factor(meta2[,2])
         #meta2 <- meta2[order(meta2[,2]),]
         #rownames(meta2) <- meta2[,1]
         #meta2 <- meta2[,-1,drop = F]
         #ssgsea5 <- ssgsea5[,rownames(meta2)]
-#
+        #
         ##meta <- meta[order(meta[,2]),]
         ##type <- meta[,2]
         ##meta2 <- as.data.frame(type)
         ##rownames(meta2) <- meta[,1]
-#
+        #
         #hm <- pheatmap::pheatmap(ssgsea5,
         #                         cluster_col = clust_cols_opt,
         #                         cluster_row = clust_rows_opt,
@@ -3571,7 +3608,7 @@ server <- function(input, output, session) {
         #                         annotation_col = meta2,
         #                         clustering_method = clust_method,
         #                         color = hmcols)
-#
+        #
         #hm
 
 
@@ -4516,14 +4553,14 @@ server <- function(input, output, session) {
         #      dataset[dataset > abs(min(dataset))] = abs(min(dataset))
         #    }
         #    meta2 <- meta[which(meta[,1] %in% c(groupA,groupB)),]
-#
+        #
         #    meta2 <- meta2[,c(colnames(meta2)[1],metacol)]
         #    meta2[,2] <- as.factor(meta2[,2])
         #    meta2 <- meta2[order(meta2[,2]),]
         #    rownames(meta2) <- meta2[,1]
         #    meta3 <- meta2[,-1,drop = F]
         #    dataset <- dataset[,rownames(meta2)]
-#
+        #
         #    zscore_range = 10;
         #    minimum = -zscore_range;
         #    maximum = zscore_range;
@@ -5611,9 +5648,12 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- MVGheatmap_react()
+          #heat <- MVGheatmap_react()
 
-          ggsave(file,heat, width = 10, height = 20)
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight1, width = input$heatmapWidth1)
+          ComplexHeatmap::draw(MVGheatmap_react())
+          dev.off()
         }
       )
 
@@ -5623,8 +5663,11 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- CustomHeatmap_react()
-          ggsave(file,heat, width = 10, height = 20)
+          #heat <- CustomHeatmap_react()
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight2, width = input$heatmapWidth2)
+          ComplexHeatmap::draw(CustomHeatmap_react())
+          dev.off()
         }
       )
 
@@ -5634,9 +5677,12 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- DEGHeatmap_react()
+          #heat <- DEGHeatmap_react()
 
-          ggsave(file,heat, width = 10, height = 20)
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight3, width = input$heatmapWidth3)
+          ComplexHeatmap::draw(DEGHeatmap_react())
+          dev.off()
         }
       )
 
