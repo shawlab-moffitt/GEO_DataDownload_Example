@@ -373,14 +373,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          downloadButton("MVGdownloadgmt", "Download MVG .gmt"),
                                                                          hr(),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette1", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette1", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowColNames1","Show Heatmap Column Names", value = T),
@@ -393,6 +393,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                   numericInput("heatmapFont2.r", "Heatmap Row Font Size:",
                                                                                                min = 5, max = 75,
                                                                                                value = 9, step = 1)
+                                                                           )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight1","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth1","Download Width (in)",value = 10)
                                                                            )
                                                                          )
                                                         )
@@ -430,14 +438,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          ),
                                                                          uiOutput("rendClustMethodsCust"),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette2", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette2", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowRowNames2","Show Heatmap Row Names", value = T),
@@ -451,6 +459,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                                min = 5, max = 75,
                                                                                                value = 12, step = 1)
                                                                            )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight2","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth2","Download Width (in)",value = 10)
+                                                                           )
                                                                          )
                                                         )
                                        ),
@@ -461,6 +477,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                         conditionalPanel(condition = "input.datasetheat == '3'",
                                                                          h4("Selection Parameters"),
                                                                          #uiOutput("rendMetaColDEGHeat"),
+                                                                         uiOutput("rendDEGcolHeat"),
                                                                          uiOutput("rendcomparisonA2_h"),
                                                                          uiOutput("rendcomparisonB2_h"),
                                                                          #selectInput("MetaColDEGHeat","Meta Column:",
@@ -490,14 +507,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                          uiOutput("rendClustMethodsDEG"),
                                                                          hr(),
                                                                          h4("Figure Parameters"),
-                                                                         selectInput("ColorPalette3", "Select Color Palette:",
-                                                                                     choices = c("Red/Blue" = "original",
-                                                                                                 "OmniBlueRed" = "OmniBlueRed",
-                                                                                                 "LightBlue/BlackRed" = "LightBlueBlackRed",
-                                                                                                 "Green/Black/Red" = "GreenBlackRed",
-                                                                                                 "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
-                                                                                                 "Viridis" = "Viridis","Plasma" = "Plasma",
-                                                                                                 "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
+                                                                         #selectInput("ColorPalette3", "Select Color Palette:",
+                                                                         #            choices = c("Red/Blue" = "original",
+                                                                         #                        "OmniBlueRed" = "OmniBlueRed",
+                                                                         #                        "LightBlue/BlackRed" = "LightBlueBlackRed",
+                                                                         #                        "Green/Black/Red" = "GreenBlackRed",
+                                                                         #                        "Yellow/Green/Blue" = "YlGnBu","Inferno" = "Inferno",
+                                                                         #                        "Viridis" = "Viridis","Plasma" = "Plasma",
+                                                                         #                        "Reds" = "OrRd","Blues" = "PuBu","Greens" = "Greens")),
                                                                          fluidRow(
                                                                            column(6,
                                                                                   checkboxInput("ShowRowNames3","Show Heatmap Row Names", value = T),
@@ -510,6 +527,14 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                                                   numericInput("heatmapFont3.c.deg", "Heatmap Column Font Size:",
                                                                                                min = 5, max = 75,
                                                                                                value = 12, step = 1)
+                                                                           )
+                                                                         ),
+                                                                         fluidRow(
+                                                                           column(6,
+                                                                                  numericInput("heatmapHeight3","Download Height (in)",value = 8)
+                                                                           ),
+                                                                           column(6,
+                                                                                  numericInput("heatmapWidth3","Download Width (in)",value = 10)
                                                                            )
                                                                          )
                                                         )
@@ -694,7 +719,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat1","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat1","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat1","Download as PDF")
                                                              ),
                                                              value = 1),
                                                     ##### Custom Heatmaps
@@ -703,7 +728,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat2","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat2","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat2","Download as PDF")
                                                              ),
                                                              value = 2),
                                                     ##### DEG Heatmaps
@@ -712,7 +737,7 @@ Data_Exploration_tab <- tabPanel("Data Exploration",
                                                              p(),
                                                              fluidRow(
                                                                downloadButton("dnldPlotSVG_heat3","Download as SVG"),
-                                                               downloadButton("dnldPlotPDF_heat3","Download as PDF")
+                                                               #downloadButton("dnldPlotPDF_heat3","Download as PDF")
                                                              ),
                                                              value = 3),
                                                     ##### Average Expr Heatmaps
@@ -1747,10 +1772,19 @@ server <- function(input, output, session) {
 
       })
 
-      output$rendcomparisonA2_h <- renderUI({
+      output$rendDEGcolHeat <- renderUI({
 
         meta <- meta_react()
         metacol <- metacol_reactVal()
+        selectInput("DEGcolHeat", "Comparison: GroupA",
+                    choices = colnames(meta)[-1], selected = metacol[1])
+      })
+
+      output$rendcomparisonA2_h <- renderUI({
+
+        meta <- meta_react()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         metagroups <- unique(meta[,metacol])
         selectInput("comparisonA2_h", "Comparison: GroupA",
                     choices = metagroups, selected = metagroups[1])
@@ -1817,7 +1851,8 @@ server <- function(input, output, session) {
       output$rendcomparisonB2_h <- renderUI({
 
         meta <- meta_react()
-        metacol <- metacol_reactVal()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         metagroups <- unique(meta[,metacol])
         selectInput("comparisonB2_h", "Comparison: GroupB",
                     choices = metagroups, selected = metagroups[2])
@@ -2475,7 +2510,8 @@ server <- function(input, output, session) {
         B_choice <- input$comparisonB2_h            #Comparison group B
 
         meta <- meta_react()
-        metacol <- metacol_reactVal()
+        #metacol <- metacol_reactVal()
+        metacol <- input$DEGcolHeat
         expr <- expr_react()
         # Make Top table - Compares only 2 groups
         #make group based on user input
@@ -5611,9 +5647,12 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- MVGheatmap_react()
+          #heat <- MVGheatmap_react()
 
-          ggsave(file,heat, width = 10, height = 20)
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight1, width = input$heatmapWidth1)
+          ComplexHeatmap::draw(MVGheatmap_react())
+          dev.off()
         }
       )
 
@@ -5623,8 +5662,11 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- CustomHeatmap_react()
-          ggsave(file,heat, width = 10, height = 20)
+          #heat <- CustomHeatmap_react()
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight2, width = input$heatmapWidth2)
+          ComplexHeatmap::draw(CustomHeatmap_react())
+          dev.off()
         }
       )
 
@@ -5634,9 +5676,12 @@ server <- function(input, output, session) {
         },
         content = function(file) {
 
-          heat <- DEGHeatmap_react()
+          #heat <- DEGHeatmap_react()
 
-          ggsave(file,heat, width = 10, height = 20)
+          #ggsave(file,heat, width = 10, height = 20)
+          svg(filename = file, height = input$heatmapHeight3, width = input$heatmapWidth3)
+          ComplexHeatmap::draw(DEGHeatmap_react())
+          dev.off()
         }
       )
 
