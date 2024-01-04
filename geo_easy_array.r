@@ -1,4 +1,6 @@
 
+rm(list = ls())
+
 library(AnnoProbe)
 library(GEOquery)
 library(limma)
@@ -11,11 +13,11 @@ library(shiny)
 library(devtools)
 
 # Set the following three parameters
-GSE_number = "GSE50532" # human example
+GSE_number = "GSE15907" # human example
 # GSE_number = "GSE66356" # mouse example
 
 #organism = "Human" # or "Mouse"
-organism = "Human" # or "Human"
+organism = "Mouse" # or "Human"
 
 # Output Folder path
 outputpath = "/Users/4472414/Documents/Current_Manuscripts/GSE_Download_Tools/Microarray_Data_Download/"
@@ -118,14 +120,19 @@ for (i in seq_along(original_df$geo_accession)) {
 final_extr_meta <- tidyr::pivot_wider(new_df, names_from = title, values_from = value)
 meta_merged <- dplyr::full_join(final_extr_meta, meta, by = "geo_accession")
 
+meta_merged %>%
+  mutate_if(is.character, str_trim)
+
 # check whether the matrix has been logged
 hist(converted_expr_matrix[,2])
+hist(log(converted_expr_matrix[,2]))
 
-converted_expr_matrix_exp = 2^converted_expr_matrix[,-1]
-new_exp = cbind(converted_expr_matrix[,1], converted_expr_matrix_exp);
-colnames(new_exp)[1] = "ID"
-
-converted_expr_matrix = new_exp
+if (quantile(converted_expr_matrix[,2])[4] < 12) {
+  converted_expr_matrix_exp = 2^converted_expr_matrix[,-1]
+  new_exp = cbind(converted_expr_matrix[,1], converted_expr_matrix_exp);
+  colnames(new_exp)[1] = "ID"
+  converted_expr_matrix = new_exp
+}
 
 outputmatrix = paste(outputpath, "/", geo_accession, ".matrix.txt", sep="")
 outputmeta = paste(outputpath, "/", geo_accession, ".meta.txt", sep="")
@@ -204,7 +211,7 @@ if (UPPERCASE_organism == "HUMAN") {
 
   # replace the expr_and meta file
   tx  <- readLines(output_file_app)
-  tx2 <- gsub(pattern = "expr_file <- ''", replace = paste("expr_file <- '", geo_accession, ".matrix.txt", "'", sep=""), x = tx)
+  tx2 <- gsub(pattern = "expr_file <- ''", replace = paste("expr_file <- '", geo_accession, ".expr.matrix.txt", "'", sep=""), x = tx)
   tx3 <- gsub(pattern = "meta_file <- ''", replace = paste("meta_file <- '", geo_accession, ".meta.txt", "'", sep=""), x = tx2)
   tx4 <- gsub(pattern = "ProjectName <- ''", replace = paste("ProjectName <- '", geo_accession, " Study", "'", sep=""), x = tx3)
   writeLines(tx4, con=output_file_app)
@@ -233,7 +240,7 @@ if (UPPERCASE_organism == "MOUSE") {
   }
 
 
-  outputmatrix = paste(output_dir, "/", geo_accession, ".matrix.txt", sep="")
+  outputmatrix = paste(output_dir, "/", geo_accession, ".expr.matrix.txt", sep="")
   outputmeta = paste(output_dir, "/", geo_accession, ".meta.txt", sep="")
   outputnote = paste(output_dir, "/", geo_accession, ".note.txt", sep="")
   write.table(converted_expr_matrix, file=outputmatrix,row.names=F, sep="\t")
