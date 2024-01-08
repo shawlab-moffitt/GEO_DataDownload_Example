@@ -13,7 +13,7 @@ library(shiny)
 library(devtools)
 
 # Set the following three parameters
-GSE_number = "GSE15907" # human example
+GSE_number = "GSE112876" # human example
 # GSE_number = "GSE66356" # mouse example
 
 #organism = "Human" # or "Mouse"
@@ -29,6 +29,8 @@ platform <- names(GPLList(gse))
 print(platform)
 
 if (length(gset) > 1) idx <- grep(platform, attr(gset, "names")) else idx <- 1
+
+grep(platform, attr(gset, "names"))
 gset <- gset[[idx]]
 expr <- exprs(gset)
 df <- as.data.frame(expr)
@@ -123,10 +125,11 @@ meta_merged <- dplyr::full_join(final_extr_meta, meta, by = "geo_accession")
 meta_merged %>%
   mutate_if(is.character, str_trim)
 
+
 # check whether the matrix has been logged
 hist(converted_expr_matrix[,2])
 hist(log(converted_expr_matrix[,2]))
-
+quantile(converted_expr_matrix[,2])[4]
 if (quantile(converted_expr_matrix[,2])[4] < 12) {
   converted_expr_matrix_exp = 2^converted_expr_matrix[,-1]
   new_exp = cbind(converted_expr_matrix[,1], converted_expr_matrix_exp);
@@ -134,11 +137,13 @@ if (quantile(converted_expr_matrix[,2])[4] < 12) {
   converted_expr_matrix = new_exp
 }
 
+#trunc(converted_expr_matrix*10^5)/10^5
+
 outputmatrix = paste(outputpath, "/", geo_accession, ".matrix.txt", sep="")
-outputmeta = paste(outputpath, "/", geo_accession, ".meta.txt", sep="")
+outputmeta = paste(outputpath, "/", geo_accession, ".meta2.txt", sep="")
 outputnote = paste(outputpath, "/", geo_accession, ".note.txt", sep="")
 write.table(converted_expr_matrix, file=outputmatrix,row.names=F, sep="\t")
-write.table(meta_merged, file=outputmeta, row.names=FALSE, sep="\t")
+write.table(as.matrix(meta_merged), file=outputmeta, row.names=FALSE, sep="\t")
 write.table(rbind(meta$treatment_protocol_ch1[1], meta$organism_ch1[1]), file=outputnote)
 
 # generation of the EASY app
