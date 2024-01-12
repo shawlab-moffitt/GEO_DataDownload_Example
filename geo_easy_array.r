@@ -41,7 +41,7 @@ df$ID <- trimws(df$ID)
 df$ID <- as.character(df$ID)
 
 platform
-full_table <- read_delim(url(paste("https://raw.githubusercontent.com/shawlab-moffitt/GEO_DataDownload_Example/main/GPL_Files/", platform, ".txt", sep="")), delim = '\t', col_names = T, )
+full_table <- read_delim(paste("https://raw.githubusercontent.com/shawlab-moffitt/GEO_DataDownload_Example/main/GPL_Files/", platform, ".txt", sep=""), delim = '\t', col_names = T)
 #rownames(full_table) <- full_table[,1]
 full_table[,1] <- NULL
 
