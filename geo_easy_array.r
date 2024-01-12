@@ -291,7 +291,7 @@ if (UPPERCASE_organism == "MOUSE") {
 
   # replace the expr_and meta file
   tx  <- readLines(output_file_app)
-  tx2 <- gsub(pattern = "expr_file <- ''", replace = paste("expr_file <- '", geo_accession, ".matrix.txt", "'", sep=""), x = tx)
+  tx2 <- gsub(pattern = "expr_file <- ''", replace = paste("expr_file <- '", geo_accession, ".expr.matrix.txt", "'", sep=""), x = tx)
   tx3 <- gsub(pattern = "meta_file <- ''", replace = paste("meta_file <- '", geo_accession, ".meta.txt", "'", sep=""), x = tx2)
   tx4 <- gsub(pattern = "ProjectName <- ''", replace = paste("ProjectName <- '", geo_accession, " Study", "'", sep=""), x = tx3)
   writeLines(tx4, con=output_file_app)
