@@ -1,0 +1,268 @@
+ID	donor_id	ICB_Response	InferCNV	FinalCellType	treat_celltype	Age at Dx	Sex	ICB	ICB Response	TKI-exposed	Biopsy Site	Histology	Grade	Stage
+P55_ICB-PR_Malignant_Cycling Tumor	P55	ICB-PR	Malignant	Cycling Tumor	ICB-PR_Cycling Tumor	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_Malignant_MitoHigh CD8+ T cell	P55	ICB-PR	Malignant	MitoHigh CD8+ T cell	ICB-PR_MitoHigh CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_Malignant_TP1	P55	ICB-PR	Malignant	TP1	ICB-PR_TP1	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_Malignant_TP2	P55	ICB-PR	Malignant	TP2	ICB-PR_TP2	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_41BB-Hi CD8+ T cell	P55	ICB-PR	NonMalignant	41BB-Hi CD8+ T cell	ICB-PR_41BB-Hi CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_41BB-Lo CD8+ T cell	P55	ICB-PR	NonMalignant	41BB-Lo CD8+ T cell	ICB-PR_41BB-Lo CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_B cell	P55	ICB-PR	NonMalignant	B cell	ICB-PR_B cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_CD16- Monocyte	P55	ICB-PR	NonMalignant	CD16- Monocyte	ICB-PR_CD16- Monocyte	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_CD16+ Monocyte	P55	ICB-PR	NonMalignant	CD16+ Monocyte	ICB-PR_CD16+ Monocyte	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_CD1C+ DC	P55	ICB-PR	NonMalignant	CD1C+ DC	ICB-PR_CD1C+ DC	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_CXCL10-Hi TAM	P55	ICB-PR	NonMalignant	CXCL10-Hi TAM	ICB-PR_CXCL10-Hi TAM	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Cycling CD8+ T cell	P55	ICB-PR	NonMalignant	Cycling CD8+ T cell	ICB-PR_Cycling CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Cycling TAM	P55	ICB-PR	NonMalignant	Cycling TAM	ICB-PR_Cycling TAM	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Effector T-Helper	P55	ICB-PR	NonMalignant	Effector T-Helper	ICB-PR_Effector T-Helper	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Endothelial	P55	ICB-PR	NonMalignant	Endothelial	ICB-PR_Endothelial	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_FGFBP2- NK	P55	ICB-PR	NonMalignant	FGFBP2- NK	ICB-PR_FGFBP2- NK	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_FGFBP2+ NK	P55	ICB-PR	NonMalignant	FGFBP2+ NK	ICB-PR_FGFBP2+ NK	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_FOLR2-Hi TAM	P55	ICB-PR	NonMalignant	FOLR2-Hi TAM	ICB-PR_FOLR2-Hi TAM	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_GPNMB-Hi TAM	P55	ICB-PR	NonMalignant	GPNMB-Hi TAM	ICB-PR_GPNMB-Hi TAM	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_LowLibSize Macrophage	P55	ICB-PR	NonMalignant	LowLibSize Macrophage	ICB-PR_LowLibSize Macrophage	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Mast cell	P55	ICB-PR	NonMalignant	Mast cell	ICB-PR_Mast cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Memory T-Helper	P55	ICB-PR	NonMalignant	Memory T-Helper	ICB-PR_Memory T-Helper	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_Misc/Undetermined	P55	ICB-PR	NonMalignant	Misc/Undetermined	ICB-PR_Misc/Undetermined	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_MitoHigh CD8+ T cell	P55	ICB-PR	NonMalignant	MitoHigh CD8+ T cell	ICB-PR_MitoHigh CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_MitoHigh Myeloid	P55	ICB-PR	NonMalignant	MitoHigh Myeloid	ICB-PR_MitoHigh Myeloid	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_MitoHigh NK	P55	ICB-PR	NonMalignant	MitoHigh NK	ICB-PR_MitoHigh NK	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_MitoHigh T-Helper	P55	ICB-PR	NonMalignant	MitoHigh T-Helper	ICB-PR_MitoHigh T-Helper	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_MX1-Hi CD8+ T cell	P55	ICB-PR	NonMalignant	MX1-Hi CD8+ T cell	ICB-PR_MX1-Hi CD8+ T cell	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_NKT	P55	ICB-PR	NonMalignant	NKT	ICB-PR_NKT	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_T-Reg	P55	ICB-PR	NonMalignant	T-Reg	ICB-PR_T-Reg	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P55_ICB-PR_NonMalignant_VSIR-Hi TAM	P55	ICB-PR	NonMalignant	VSIR-Hi TAM	ICB-PR_VSIR-Hi TAM	57.14168378	M	aPD-1	PR	TKI	Abdominal Mass 	Clear cell	3	IV
+P76_NoICB_Malignant_Cycling Tumor	P76	NoICB	Malignant	Cycling Tumor	NoICB_Cycling Tumor	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_Malignant_MitoHigh CD8+ T cell	P76	NoICB	Malignant	MitoHigh CD8+ T cell	NoICB_MitoHigh CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_Malignant_NKT	P76	NoICB	Malignant	NKT	NoICB_NKT	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_Malignant_Plasma cell	P76	NoICB	Malignant	Plasma cell	NoICB_Plasma cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_Malignant_TP1	P76	NoICB	Malignant	TP1	NoICB_TP1	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_Malignant_TP2	P76	NoICB	Malignant	TP2	NoICB_TP2	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_41BB-Hi CD8+ T cell	P76	NoICB	NonMalignant	41BB-Hi CD8+ T cell	NoICB_41BB-Hi CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_41BB-Lo CD8+ T cell	P76	NoICB	NonMalignant	41BB-Lo CD8+ T cell	NoICB_41BB-Lo CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_B cell	P76	NoICB	NonMalignant	B cell	NoICB_B cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_CD16- Monocyte	P76	NoICB	NonMalignant	CD16- Monocyte	NoICB_CD16- Monocyte	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_CD16+ Monocyte	P76	NoICB	NonMalignant	CD16+ Monocyte	NoICB_CD16+ Monocyte	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_CD1C+ DC	P76	NoICB	NonMalignant	CD1C+ DC	NoICB_CD1C+ DC	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_CLEC9A+ DC	P76	NoICB	NonMalignant	CLEC9A+ DC	NoICB_CLEC9A+ DC	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_CXCL10-Hi TAM	P76	NoICB	NonMalignant	CXCL10-Hi TAM	NoICB_CXCL10-Hi TAM	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Cycling CD8+ T cell	P76	NoICB	NonMalignant	Cycling CD8+ T cell	NoICB_Cycling CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Cycling TAM	P76	NoICB	NonMalignant	Cycling TAM	NoICB_Cycling TAM	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Effector T-Helper	P76	NoICB	NonMalignant	Effector T-Helper	NoICB_Effector T-Helper	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Endothelial	P76	NoICB	NonMalignant	Endothelial	NoICB_Endothelial	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_FGFBP2- NK	P76	NoICB	NonMalignant	FGFBP2- NK	NoICB_FGFBP2- NK	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_FGFBP2+ NK	P76	NoICB	NonMalignant	FGFBP2+ NK	NoICB_FGFBP2+ NK	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_FOLR2-Hi TAM	P76	NoICB	NonMalignant	FOLR2-Hi TAM	NoICB_FOLR2-Hi TAM	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_GPNMB-Hi TAM	P76	NoICB	NonMalignant	GPNMB-Hi TAM	NoICB_GPNMB-Hi TAM	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_LowLibSize Macrophage	P76	NoICB	NonMalignant	LowLibSize Macrophage	NoICB_LowLibSize Macrophage	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Mast cell	P76	NoICB	NonMalignant	Mast cell	NoICB_Mast cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Memory T-Helper	P76	NoICB	NonMalignant	Memory T-Helper	NoICB_Memory T-Helper	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Misc/Undetermined	P76	NoICB	NonMalignant	Misc/Undetermined	NoICB_Misc/Undetermined	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_MitoHigh CD8+ T cell	P76	NoICB	NonMalignant	MitoHigh CD8+ T cell	NoICB_MitoHigh CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_MitoHigh Myeloid	P76	NoICB	NonMalignant	MitoHigh Myeloid	NoICB_MitoHigh Myeloid	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_MitoHigh NK	P76	NoICB	NonMalignant	MitoHigh NK	NoICB_MitoHigh NK	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_MitoHigh T-Helper	P76	NoICB	NonMalignant	MitoHigh T-Helper	NoICB_MitoHigh T-Helper	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_MX1-Hi CD8+ T cell	P76	NoICB	NonMalignant	MX1-Hi CD8+ T cell	NoICB_MX1-Hi CD8+ T cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_NKT	P76	NoICB	NonMalignant	NKT	NoICB_NKT	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_Plasma cell	P76	NoICB	NonMalignant	Plasma cell	NoICB_Plasma cell	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_T-Reg	P76	NoICB	NonMalignant	T-Reg	NoICB_T-Reg	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P76_NoICB_NonMalignant_VSIR-Hi TAM	P76	NoICB	NonMalignant	VSIR-Hi TAM	NoICB_VSIR-Hi TAM	67.8220397	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	IV
+P90_NoICB_Malignant_41BB-Lo CD8+ T cell	P90	NoICB	Malignant	41BB-Lo CD8+ T cell	NoICB_41BB-Lo CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_B cell	P90	NoICB	Malignant	B cell	NoICB_B cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_Cycling CD8+ T cell	P90	NoICB	Malignant	Cycling CD8+ T cell	NoICB_Cycling CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_Cycling Tumor	P90	NoICB	Malignant	Cycling Tumor	NoICB_Cycling Tumor	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_Endothelial	P90	NoICB	Malignant	Endothelial	NoICB_Endothelial	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_LowLibSize Macrophage	P90	NoICB	Malignant	LowLibSize Macrophage	NoICB_LowLibSize Macrophage	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_MitoHigh Myeloid	P90	NoICB	Malignant	MitoHigh Myeloid	NoICB_MitoHigh Myeloid	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_MitoHigh T-Helper	P90	NoICB	Malignant	MitoHigh T-Helper	NoICB_MitoHigh T-Helper	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_TP1	P90	NoICB	Malignant	TP1	NoICB_TP1	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_Malignant_TP2	P90	NoICB	Malignant	TP2	NoICB_TP2	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_41BB-Hi CD8+ T cell	P90	NoICB	NonMalignant	41BB-Hi CD8+ T cell	NoICB_41BB-Hi CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_41BB-Lo CD8+ T cell	P90	NoICB	NonMalignant	41BB-Lo CD8+ T cell	NoICB_41BB-Lo CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_B cell	P90	NoICB	NonMalignant	B cell	NoICB_B cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_CD16- Monocyte	P90	NoICB	NonMalignant	CD16- Monocyte	NoICB_CD16- Monocyte	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_CD16+ Monocyte	P90	NoICB	NonMalignant	CD16+ Monocyte	NoICB_CD16+ Monocyte	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_CD1C+ DC	P90	NoICB	NonMalignant	CD1C+ DC	NoICB_CD1C+ DC	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_CLEC9A+ DC	P90	NoICB	NonMalignant	CLEC9A+ DC	NoICB_CLEC9A+ DC	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_CXCL10-Hi TAM	P90	NoICB	NonMalignant	CXCL10-Hi TAM	NoICB_CXCL10-Hi TAM	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Cycling CD8+ T cell	P90	NoICB	NonMalignant	Cycling CD8+ T cell	NoICB_Cycling CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Cycling TAM	P90	NoICB	NonMalignant	Cycling TAM	NoICB_Cycling TAM	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Effector T-Helper	P90	NoICB	NonMalignant	Effector T-Helper	NoICB_Effector T-Helper	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_FGFBP2- NK	P90	NoICB	NonMalignant	FGFBP2- NK	NoICB_FGFBP2- NK	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_FGFBP2+ NK	P90	NoICB	NonMalignant	FGFBP2+ NK	NoICB_FGFBP2+ NK	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_FOLR2-Hi TAM	P90	NoICB	NonMalignant	FOLR2-Hi TAM	NoICB_FOLR2-Hi TAM	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_GPNMB-Hi TAM	P90	NoICB	NonMalignant	GPNMB-Hi TAM	NoICB_GPNMB-Hi TAM	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_LowLibSize Macrophage	P90	NoICB	NonMalignant	LowLibSize Macrophage	NoICB_LowLibSize Macrophage	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Mast cell	P90	NoICB	NonMalignant	Mast cell	NoICB_Mast cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Memory T-Helper	P90	NoICB	NonMalignant	Memory T-Helper	NoICB_Memory T-Helper	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Misc/Undetermined	P90	NoICB	NonMalignant	Misc/Undetermined	NoICB_Misc/Undetermined	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_MitoHigh CD8+ T cell	P90	NoICB	NonMalignant	MitoHigh CD8+ T cell	NoICB_MitoHigh CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_MitoHigh Myeloid	P90	NoICB	NonMalignant	MitoHigh Myeloid	NoICB_MitoHigh Myeloid	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_MitoHigh NK	P90	NoICB	NonMalignant	MitoHigh NK	NoICB_MitoHigh NK	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_MitoHigh T-Helper	P90	NoICB	NonMalignant	MitoHigh T-Helper	NoICB_MitoHigh T-Helper	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_MX1-Hi CD8+ T cell	P90	NoICB	NonMalignant	MX1-Hi CD8+ T cell	NoICB_MX1-Hi CD8+ T cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_NKT	P90	NoICB	NonMalignant	NKT	NoICB_NKT	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_Plasma cell	P90	NoICB	NonMalignant	Plasma cell	NoICB_Plasma cell	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_T-Reg	P90	NoICB	NonMalignant	T-Reg	NoICB_T-Reg	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P90_NoICB_NonMalignant_VSIR-Hi TAM	P90	NoICB	NonMalignant	VSIR-Hi TAM	NoICB_VSIR-Hi TAM	71	F	No ICB	N/A	No TKI	Kidney	Clear cell	4	I
+P906_ICB-PD_Malignant_Cycling CD8+ T cell	P906	ICB-PD	Malignant	Cycling CD8+ T cell	ICB-PD_Cycling CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_Cycling Tumor	P906	ICB-PD	Malignant	Cycling Tumor	ICB-PD_Cycling Tumor	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_MitoHigh CD8+ T cell	P906	ICB-PD	Malignant	MitoHigh CD8+ T cell	ICB-PD_MitoHigh CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_MitoHigh Myeloid	P906	ICB-PD	Malignant	MitoHigh Myeloid	ICB-PD_MitoHigh Myeloid	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_MitoHigh T-Helper	P906	ICB-PD	Malignant	MitoHigh T-Helper	ICB-PD_MitoHigh T-Helper	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_TP1	P906	ICB-PD	Malignant	TP1	ICB-PD_TP1	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_Malignant_TP2	P906	ICB-PD	Malignant	TP2	ICB-PD_TP2	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_41BB-Hi CD8+ T cell	P906	ICB-PD	NonMalignant	41BB-Hi CD8+ T cell	ICB-PD_41BB-Hi CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_41BB-Lo CD8+ T cell	P906	ICB-PD	NonMalignant	41BB-Lo CD8+ T cell	ICB-PD_41BB-Lo CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_B cell	P906	ICB-PD	NonMalignant	B cell	ICB-PD_B cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_CD16- Monocyte	P906	ICB-PD	NonMalignant	CD16- Monocyte	ICB-PD_CD16- Monocyte	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_CD16+ Monocyte	P906	ICB-PD	NonMalignant	CD16+ Monocyte	ICB-PD_CD16+ Monocyte	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_CD1C+ DC	P906	ICB-PD	NonMalignant	CD1C+ DC	ICB-PD_CD1C+ DC	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_CLEC9A+ DC	P906	ICB-PD	NonMalignant	CLEC9A+ DC	ICB-PD_CLEC9A+ DC	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_CXCL10-Hi TAM	P906	ICB-PD	NonMalignant	CXCL10-Hi TAM	ICB-PD_CXCL10-Hi TAM	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Cycling CD8+ T cell	P906	ICB-PD	NonMalignant	Cycling CD8+ T cell	ICB-PD_Cycling CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Cycling TAM	P906	ICB-PD	NonMalignant	Cycling TAM	ICB-PD_Cycling TAM	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Effector T-Helper	P906	ICB-PD	NonMalignant	Effector T-Helper	ICB-PD_Effector T-Helper	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Endothelial	P906	ICB-PD	NonMalignant	Endothelial	ICB-PD_Endothelial	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_FGFBP2- NK	P906	ICB-PD	NonMalignant	FGFBP2- NK	ICB-PD_FGFBP2- NK	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_FGFBP2+ NK	P906	ICB-PD	NonMalignant	FGFBP2+ NK	ICB-PD_FGFBP2+ NK	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Fibroblast	P906	ICB-PD	NonMalignant	Fibroblast	ICB-PD_Fibroblast	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_FOLR2-Hi TAM	P906	ICB-PD	NonMalignant	FOLR2-Hi TAM	ICB-PD_FOLR2-Hi TAM	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_GPNMB-Hi TAM	P906	ICB-PD	NonMalignant	GPNMB-Hi TAM	ICB-PD_GPNMB-Hi TAM	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_LowLibSize Macrophage	P906	ICB-PD	NonMalignant	LowLibSize Macrophage	ICB-PD_LowLibSize Macrophage	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Memory T-Helper	P906	ICB-PD	NonMalignant	Memory T-Helper	ICB-PD_Memory T-Helper	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Misc/Undetermined	P906	ICB-PD	NonMalignant	Misc/Undetermined	ICB-PD_Misc/Undetermined	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_MitoHigh CD8+ T cell	P906	ICB-PD	NonMalignant	MitoHigh CD8+ T cell	ICB-PD_MitoHigh CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_MitoHigh Myeloid	P906	ICB-PD	NonMalignant	MitoHigh Myeloid	ICB-PD_MitoHigh Myeloid	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_MitoHigh NK	P906	ICB-PD	NonMalignant	MitoHigh NK	ICB-PD_MitoHigh NK	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_MitoHigh T-Helper	P906	ICB-PD	NonMalignant	MitoHigh T-Helper	ICB-PD_MitoHigh T-Helper	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_MX1-Hi CD8+ T cell	P906	ICB-PD	NonMalignant	MX1-Hi CD8+ T cell	ICB-PD_MX1-Hi CD8+ T cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_NKT	P906	ICB-PD	NonMalignant	NKT	ICB-PD_NKT	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_Plasma cell	P906	ICB-PD	NonMalignant	Plasma cell	ICB-PD_Plasma cell	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_T-Reg	P906	ICB-PD	NonMalignant	T-Reg	ICB-PD_T-Reg	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P906_ICB-PD_NonMalignant_VSIR-Hi TAM	P906	ICB-PD	NonMalignant	VSIR-Hi TAM	ICB-PD_VSIR-Hi TAM	61.81245722	M	aPD-1	PD	TKI	Lymph node  	Papillary	3	IV
+P912_ICB-NE_Malignant_TP2	P912	ICB-NE	Malignant	TP2	ICB-NE_TP2	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_41BB-Hi CD8+ T cell	P912	ICB-NE	NonMalignant	41BB-Hi CD8+ T cell	ICB-NE_41BB-Hi CD8+ T cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_41BB-Lo CD8+ T cell	P912	ICB-NE	NonMalignant	41BB-Lo CD8+ T cell	ICB-NE_41BB-Lo CD8+ T cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_B cell	P912	ICB-NE	NonMalignant	B cell	ICB-NE_B cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_CD16- Monocyte	P912	ICB-NE	NonMalignant	CD16- Monocyte	ICB-NE_CD16- Monocyte	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_CD1C+ DC	P912	ICB-NE	NonMalignant	CD1C+ DC	ICB-NE_CD1C+ DC	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_CXCL10-Hi TAM	P912	ICB-NE	NonMalignant	CXCL10-Hi TAM	ICB-NE_CXCL10-Hi TAM	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Cycling CD8+ T cell	P912	ICB-NE	NonMalignant	Cycling CD8+ T cell	ICB-NE_Cycling CD8+ T cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Cycling TAM	P912	ICB-NE	NonMalignant	Cycling TAM	ICB-NE_Cycling TAM	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Effector T-Helper	P912	ICB-NE	NonMalignant	Effector T-Helper	ICB-NE_Effector T-Helper	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Endothelial	P912	ICB-NE	NonMalignant	Endothelial	ICB-NE_Endothelial	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_FGFBP2+ NK	P912	ICB-NE	NonMalignant	FGFBP2+ NK	ICB-NE_FGFBP2+ NK	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Fibroblast	P912	ICB-NE	NonMalignant	Fibroblast	ICB-NE_Fibroblast	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_FOLR2-Hi TAM	P912	ICB-NE	NonMalignant	FOLR2-Hi TAM	ICB-NE_FOLR2-Hi TAM	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_GPNMB-Hi TAM	P912	ICB-NE	NonMalignant	GPNMB-Hi TAM	ICB-NE_GPNMB-Hi TAM	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_LowLibSize Macrophage	P912	ICB-NE	NonMalignant	LowLibSize Macrophage	ICB-NE_LowLibSize Macrophage	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Memory T-Helper	P912	ICB-NE	NonMalignant	Memory T-Helper	ICB-NE_Memory T-Helper	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Misc/Undetermined	P912	ICB-NE	NonMalignant	Misc/Undetermined	ICB-NE_Misc/Undetermined	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_MitoHigh CD8+ T cell	P912	ICB-NE	NonMalignant	MitoHigh CD8+ T cell	ICB-NE_MitoHigh CD8+ T cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_MitoHigh Myeloid	P912	ICB-NE	NonMalignant	MitoHigh Myeloid	ICB-NE_MitoHigh Myeloid	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_MitoHigh T-Helper	P912	ICB-NE	NonMalignant	MitoHigh T-Helper	ICB-NE_MitoHigh T-Helper	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_MX1-Hi CD8+ T cell	P912	ICB-NE	NonMalignant	MX1-Hi CD8+ T cell	ICB-NE_MX1-Hi CD8+ T cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_NKT	P912	ICB-NE	NonMalignant	NKT	ICB-NE_NKT	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_Plasma cell	P912	ICB-NE	NonMalignant	Plasma cell	ICB-NE_Plasma cell	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_T-Reg	P912	ICB-NE	NonMalignant	T-Reg	ICB-NE_T-Reg	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P912_ICB-NE_NonMalignant_VSIR-Hi TAM	P912	ICB-NE	NonMalignant	VSIR-Hi TAM	ICB-NE_VSIR-Hi TAM	59.55646817	M	aPD1 + VEGF TKI	NE	TKI	Lymph node	Clear cell	4	IV
+P913_ICB-SD_Malignant_Cycling Tumor	P913	ICB-SD	Malignant	Cycling Tumor	ICB-SD_Cycling Tumor	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_Malignant_LowLibSize Macrophage	P913	ICB-SD	Malignant	LowLibSize Macrophage	ICB-SD_LowLibSize Macrophage	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_Malignant_MitoHigh CD8+ T cell	P913	ICB-SD	Malignant	MitoHigh CD8+ T cell	ICB-SD_MitoHigh CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_Malignant_TP1	P913	ICB-SD	Malignant	TP1	ICB-SD_TP1	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_Malignant_TP2	P913	ICB-SD	Malignant	TP2	ICB-SD_TP2	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_41BB-Hi CD8+ T cell	P913	ICB-SD	NonMalignant	41BB-Hi CD8+ T cell	ICB-SD_41BB-Hi CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_41BB-Lo CD8+ T cell	P913	ICB-SD	NonMalignant	41BB-Lo CD8+ T cell	ICB-SD_41BB-Lo CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_B cell	P913	ICB-SD	NonMalignant	B cell	ICB-SD_B cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_CD16- Monocyte	P913	ICB-SD	NonMalignant	CD16- Monocyte	ICB-SD_CD16- Monocyte	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_CD16+ Monocyte	P913	ICB-SD	NonMalignant	CD16+ Monocyte	ICB-SD_CD16+ Monocyte	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_CD1C+ DC	P913	ICB-SD	NonMalignant	CD1C+ DC	ICB-SD_CD1C+ DC	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_CLEC9A+ DC	P913	ICB-SD	NonMalignant	CLEC9A+ DC	ICB-SD_CLEC9A+ DC	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_CXCL10-Hi TAM	P913	ICB-SD	NonMalignant	CXCL10-Hi TAM	ICB-SD_CXCL10-Hi TAM	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Cycling CD8+ T cell	P913	ICB-SD	NonMalignant	Cycling CD8+ T cell	ICB-SD_Cycling CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Cycling TAM	P913	ICB-SD	NonMalignant	Cycling TAM	ICB-SD_Cycling TAM	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Effector T-Helper	P913	ICB-SD	NonMalignant	Effector T-Helper	ICB-SD_Effector T-Helper	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Endothelial	P913	ICB-SD	NonMalignant	Endothelial	ICB-SD_Endothelial	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_FGFBP2- NK	P913	ICB-SD	NonMalignant	FGFBP2- NK	ICB-SD_FGFBP2- NK	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_FGFBP2+ NK	P913	ICB-SD	NonMalignant	FGFBP2+ NK	ICB-SD_FGFBP2+ NK	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Fibroblast	P913	ICB-SD	NonMalignant	Fibroblast	ICB-SD_Fibroblast	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_FOLR2-Hi TAM	P913	ICB-SD	NonMalignant	FOLR2-Hi TAM	ICB-SD_FOLR2-Hi TAM	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_GPNMB-Hi TAM	P913	ICB-SD	NonMalignant	GPNMB-Hi TAM	ICB-SD_GPNMB-Hi TAM	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_LowLibSize Macrophage	P913	ICB-SD	NonMalignant	LowLibSize Macrophage	ICB-SD_LowLibSize Macrophage	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Mast cell	P913	ICB-SD	NonMalignant	Mast cell	ICB-SD_Mast cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Memory T-Helper	P913	ICB-SD	NonMalignant	Memory T-Helper	ICB-SD_Memory T-Helper	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Misc/Undetermined	P913	ICB-SD	NonMalignant	Misc/Undetermined	ICB-SD_Misc/Undetermined	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_MitoHigh CD8+ T cell	P913	ICB-SD	NonMalignant	MitoHigh CD8+ T cell	ICB-SD_MitoHigh CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_MitoHigh Myeloid	P913	ICB-SD	NonMalignant	MitoHigh Myeloid	ICB-SD_MitoHigh Myeloid	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_MitoHigh NK	P913	ICB-SD	NonMalignant	MitoHigh NK	ICB-SD_MitoHigh NK	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_MitoHigh T-Helper	P913	ICB-SD	NonMalignant	MitoHigh T-Helper	ICB-SD_MitoHigh T-Helper	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_MX1-Hi CD8+ T cell	P913	ICB-SD	NonMalignant	MX1-Hi CD8+ T cell	ICB-SD_MX1-Hi CD8+ T cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_NKT	P913	ICB-SD	NonMalignant	NKT	ICB-SD_NKT	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_Plasma cell	P913	ICB-SD	NonMalignant	Plasma cell	ICB-SD_Plasma cell	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_T-Reg	P913	ICB-SD	NonMalignant	T-Reg	ICB-SD_T-Reg	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P913_ICB-SD_NonMalignant_VSIR-Hi TAM	P913	ICB-SD	NonMalignant	VSIR-Hi TAM	ICB-SD_VSIR-Hi TAM	47.19507187	M	aPD1 + VEGF TKI	SD	TKI	Lung	Clear cell	4	IV
+P915_ICB-PR_Malignant_41BB-Hi CD8+ T cell	P915	ICB-PR	Malignant	41BB-Hi CD8+ T cell	ICB-PR_41BB-Hi CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_Malignant_41BB-Lo CD8+ T cell	P915	ICB-PR	Malignant	41BB-Lo CD8+ T cell	ICB-PR_41BB-Lo CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_Malignant_Cycling Tumor	P915	ICB-PR	Malignant	Cycling Tumor	ICB-PR_Cycling Tumor	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_Malignant_NKT	P915	ICB-PR	Malignant	NKT	ICB-PR_NKT	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_Malignant_TP1	P915	ICB-PR	Malignant	TP1	ICB-PR_TP1	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_Malignant_TP2	P915	ICB-PR	Malignant	TP2	ICB-PR_TP2	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_41BB-Hi CD8+ T cell	P915	ICB-PR	NonMalignant	41BB-Hi CD8+ T cell	ICB-PR_41BB-Hi CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_41BB-Lo CD8+ T cell	P915	ICB-PR	NonMalignant	41BB-Lo CD8+ T cell	ICB-PR_41BB-Lo CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_B cell	P915	ICB-PR	NonMalignant	B cell	ICB-PR_B cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_CD16- Monocyte	P915	ICB-PR	NonMalignant	CD16- Monocyte	ICB-PR_CD16- Monocyte	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_CD16+ Monocyte	P915	ICB-PR	NonMalignant	CD16+ Monocyte	ICB-PR_CD16+ Monocyte	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_CD1C+ DC	P915	ICB-PR	NonMalignant	CD1C+ DC	ICB-PR_CD1C+ DC	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_CLEC9A+ DC	P915	ICB-PR	NonMalignant	CLEC9A+ DC	ICB-PR_CLEC9A+ DC	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_CXCL10-Hi TAM	P915	ICB-PR	NonMalignant	CXCL10-Hi TAM	ICB-PR_CXCL10-Hi TAM	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Cycling CD8+ T cell	P915	ICB-PR	NonMalignant	Cycling CD8+ T cell	ICB-PR_Cycling CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Cycling TAM	P915	ICB-PR	NonMalignant	Cycling TAM	ICB-PR_Cycling TAM	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Effector T-Helper	P915	ICB-PR	NonMalignant	Effector T-Helper	ICB-PR_Effector T-Helper	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Endothelial	P915	ICB-PR	NonMalignant	Endothelial	ICB-PR_Endothelial	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_FGFBP2- NK	P915	ICB-PR	NonMalignant	FGFBP2- NK	ICB-PR_FGFBP2- NK	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_FGFBP2+ NK	P915	ICB-PR	NonMalignant	FGFBP2+ NK	ICB-PR_FGFBP2+ NK	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Fibroblast	P915	ICB-PR	NonMalignant	Fibroblast	ICB-PR_Fibroblast	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_FOLR2-Hi TAM	P915	ICB-PR	NonMalignant	FOLR2-Hi TAM	ICB-PR_FOLR2-Hi TAM	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_GPNMB-Hi TAM	P915	ICB-PR	NonMalignant	GPNMB-Hi TAM	ICB-PR_GPNMB-Hi TAM	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_LowLibSize Macrophage	P915	ICB-PR	NonMalignant	LowLibSize Macrophage	ICB-PR_LowLibSize Macrophage	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Memory T-Helper	P915	ICB-PR	NonMalignant	Memory T-Helper	ICB-PR_Memory T-Helper	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Misc/Undetermined	P915	ICB-PR	NonMalignant	Misc/Undetermined	ICB-PR_Misc/Undetermined	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_MitoHigh CD8+ T cell	P915	ICB-PR	NonMalignant	MitoHigh CD8+ T cell	ICB-PR_MitoHigh CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_MitoHigh Myeloid	P915	ICB-PR	NonMalignant	MitoHigh Myeloid	ICB-PR_MitoHigh Myeloid	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_MitoHigh NK	P915	ICB-PR	NonMalignant	MitoHigh NK	ICB-PR_MitoHigh NK	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_MitoHigh T-Helper	P915	ICB-PR	NonMalignant	MitoHigh T-Helper	ICB-PR_MitoHigh T-Helper	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_MX1-Hi CD8+ T cell	P915	ICB-PR	NonMalignant	MX1-Hi CD8+ T cell	ICB-PR_MX1-Hi CD8+ T cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_NKT	P915	ICB-PR	NonMalignant	NKT	ICB-PR_NKT	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_Plasma cell	P915	ICB-PR	NonMalignant	Plasma cell	ICB-PR_Plasma cell	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_T-Reg	P915	ICB-PR	NonMalignant	T-Reg	ICB-PR_T-Reg	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P915_ICB-PR_NonMalignant_VSIR-Hi TAM	P915	ICB-PR	NonMalignant	VSIR-Hi TAM	ICB-PR_VSIR-Hi TAM	58.22587269	M	aPD-1 + aCTLA-4	PR	No TKI	Kidney	Clear cell	3	IV
+P916_NoICB_Malignant_Cycling CD8+ T cell	P916	NoICB	Malignant	Cycling CD8+ T cell	NoICB_Cycling CD8+ T cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_Malignant_Cycling Tumor	P916	NoICB	Malignant	Cycling Tumor	NoICB_Cycling Tumor	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_Malignant_Endothelial	P916	NoICB	Malignant	Endothelial	NoICB_Endothelial	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_Malignant_TP1	P916	NoICB	Malignant	TP1	NoICB_TP1	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_Malignant_TP2	P916	NoICB	Malignant	TP2	NoICB_TP2	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_41BB-Hi CD8+ T cell	P916	NoICB	NonMalignant	41BB-Hi CD8+ T cell	NoICB_41BB-Hi CD8+ T cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_41BB-Lo CD8+ T cell	P916	NoICB	NonMalignant	41BB-Lo CD8+ T cell	NoICB_41BB-Lo CD8+ T cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_B cell	P916	NoICB	NonMalignant	B cell	NoICB_B cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_CD16- Monocyte	P916	NoICB	NonMalignant	CD16- Monocyte	NoICB_CD16- Monocyte	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_CD16+ Monocyte	P916	NoICB	NonMalignant	CD16+ Monocyte	NoICB_CD16+ Monocyte	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_CLEC9A+ DC	P916	NoICB	NonMalignant	CLEC9A+ DC	NoICB_CLEC9A+ DC	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_CXCL10-Hi TAM	P916	NoICB	NonMalignant	CXCL10-Hi TAM	NoICB_CXCL10-Hi TAM	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Cycling CD8+ T cell	P916	NoICB	NonMalignant	Cycling CD8+ T cell	NoICB_Cycling CD8+ T cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Cycling TAM	P916	NoICB	NonMalignant	Cycling TAM	NoICB_Cycling TAM	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Effector T-Helper	P916	NoICB	NonMalignant	Effector T-Helper	NoICB_Effector T-Helper	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Endothelial	P916	NoICB	NonMalignant	Endothelial	NoICB_Endothelial	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_FGFBP2- NK	P916	NoICB	NonMalignant	FGFBP2- NK	NoICB_FGFBP2- NK	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_FGFBP2+ NK	P916	NoICB	NonMalignant	FGFBP2+ NK	NoICB_FGFBP2+ NK	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Fibroblast	P916	NoICB	NonMalignant	Fibroblast	NoICB_Fibroblast	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_FOLR2-Hi TAM	P916	NoICB	NonMalignant	FOLR2-Hi TAM	NoICB_FOLR2-Hi TAM	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_GPNMB-Hi TAM	P916	NoICB	NonMalignant	GPNMB-Hi TAM	NoICB_GPNMB-Hi TAM	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_LowLibSize Macrophage	P916	NoICB	NonMalignant	LowLibSize Macrophage	NoICB_LowLibSize Macrophage	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Memory T-Helper	P916	NoICB	NonMalignant	Memory T-Helper	NoICB_Memory T-Helper	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Misc/Undetermined	P916	NoICB	NonMalignant	Misc/Undetermined	NoICB_Misc/Undetermined	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_MitoHigh CD8+ T cell	P916	NoICB	NonMalignant	MitoHigh CD8+ T cell	NoICB_MitoHigh CD8+ T cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_MitoHigh Myeloid	P916	NoICB	NonMalignant	MitoHigh Myeloid	NoICB_MitoHigh Myeloid	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_MitoHigh T-Helper	P916	NoICB	NonMalignant	MitoHigh T-Helper	NoICB_MitoHigh T-Helper	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_NKT	P916	NoICB	NonMalignant	NKT	NoICB_NKT	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_Plasma cell	P916	NoICB	NonMalignant	Plasma cell	NoICB_Plasma cell	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_T-Reg	P916	NoICB	NonMalignant	T-Reg	NoICB_T-Reg	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
+P916_NoICB_NonMalignant_VSIR-Hi TAM	P916	NoICB	NonMalignant	VSIR-Hi TAM	NoICB_VSIR-Hi TAM	61.05407255	M	No ICB	N/A	No TKI	Lymph node	Clear cell	4	IV
